@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'victima_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'victima_dev',
-        'USER': 'sa',
-        'PASSWORD': 'Soporte1*',
-        'HOST': 'DESKTOP-UP3AEA7\\GSI',
+        'NAME': 'vict_dev',
+        'USER': 'ivonne',
+        'PASSWORD': '5410',
+        'HOST': 'IVONNE\SQLEXPRESS',
         'PORT': '',
         'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',

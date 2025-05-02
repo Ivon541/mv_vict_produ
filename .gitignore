@@ -6,7 +6,7 @@ pyvenv.cfg
 scripts/
 Lib/
 Include/
-victima_project/victima_project/settings.py
+victima_project/victima_project/victima_project/settings.py
 
 ### Django ###
 *.log

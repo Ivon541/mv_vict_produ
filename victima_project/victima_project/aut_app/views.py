@@ -16,7 +16,7 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("inicio"))
         else:
-            return render(request, "aut_app/login.html", {"error": "Invalid username or password"})
+            return render(request, "aut_app/dashboard.html", {"error": "Invalid username or password"})
     return render(request, "aut_app/login.html")
 
 def inicio_view(request):
