@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Contratos</title>
-</head>
-<body>
+{% extends "aut_app/base_generica.html" %}
+
+{% block content %}
     <h1>Listado de Contratos</h1>
     <ul>
         {% for contrato in contratos %}
@@ -14,5 +9,4 @@
             <li>No hay contratos disponibles.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
