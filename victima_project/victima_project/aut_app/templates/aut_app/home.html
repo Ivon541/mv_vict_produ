@@ -1,0 +1,48 @@
+{% extends "aut_app/base_generica.html" %}
+
+{%block title %}Inicio - Victimas del Conflicto Armado{% endblock %}
+    
+    {% load static %}
+
+{% block content %}
+    <header>
+        <h1>Victimas del Conflicto Armado</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Contacto</a></li>
+                           
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Bienvenidos</h2>
+            <p>Esta plataforma está dedicada a honrar y apoyar a las víctimas del conflicto armado. Aquí encontrarás información, recursos y formas de contribuir a esta causa.</p>
+        </section>
+        <section>
+            <h2>Últimas Noticias</h2>
+            <div class="news-cards">
+            <div class="card">
+                <h3><a href="#">Noticia 1</a></h3>
+                <p>Descripción breve de la Noticia 1.</p>
+            </div>
+            <div class="card">
+                <h3><a href="#">Noticia 2</a></h3>
+                <p>Descripción breve de la Noticia 2.</p>
+            </div>
+            <div class="card">
+                <h3><a href="#">Noticia 3</a></h3>
+                <p>Descripción breve de la Noticia 3.</p>
+            </div>
+            </div>
+        </section>
+        <section>
+            <h2>Acceso</h2>
+            <p>Si ya tienes una cuenta, puedes <a href="{% url 'login' %}">iniciar sesión aquí</a>.</p>
+        </section>
+    </main>
+{% endblock %}
