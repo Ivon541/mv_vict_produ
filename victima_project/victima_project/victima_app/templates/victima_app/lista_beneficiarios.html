@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Beneficiarios</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Lista de Beneficiarios</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th> id_beneficiario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>documento_identidad</th>
+               
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for beneficiario in beneficiarios %}
+            <tr>
+                <td>{{ id_beneficiario }}</td>
+                <td>{{ beneficiario.nombre }}</td>
+                <td>{{ beneficiario.apellido }}</td>
+                <td>{{ beneficiario.documento_identidad }}</td>
+                <td>
+                    <a href="{% url 'detalle_beneficiario' beneficiario.id %}">Ver Detalle</a>
+                    <a href="{% url 'editar_beneficiario' beneficiario.id %}">Editar</a>
+                    <a href="{% url 'eliminar_beneficiario' beneficiario.id %}" onclick="return confirm('¿Estás seguro de eliminar este beneficiario?');">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay beneficiarios registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
