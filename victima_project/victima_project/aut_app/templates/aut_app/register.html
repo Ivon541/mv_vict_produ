@@ -1,14 +1,8 @@
-{% load static %}
+{% extends "aut_app/base_generica.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="{% static 'aut_app/css/styles.css' %}">
-</head>
-<body>
+{%block title %}Registro{% endblock %}
+
+{%block content %}
     <div class="container">
         <h2>Register</h2>
         <form method="post" action="{% url 'register' %}">
@@ -41,5 +35,4 @@
         </form>
         <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
     </div>
-</body>
-</html>
+{% endblock %}

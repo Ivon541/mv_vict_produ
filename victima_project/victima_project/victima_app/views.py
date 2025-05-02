@@ -1,18 +1,47 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from victima_app.models import Contratos
 from victima_app.models import Beneficiarios
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 #from .forms import BeneficiarioForm 
 #from .forms import BeneficiarioForm
 
 
 # Crear en django una vista que muestre un listado de contratos
-def contract_list(request):
-    # Aquí iría la lógica para obtener los contratos de la base de datos
-    contrato = Contratos.objects.all()  # Obtener los contratos de la base de datos
+def contrato_list(request):
+    contratos = Contratos.objects.all()  # Obtener los contratos de la base de datos
     context = {
-        'contratos': contrato  # Pasar los contratos al contexto
+        'contratos': contratos  # Pasar los contratos al contexto
     }
-    return render(request, 'victima/lista_contratos.html', context)  # Renderizar la plantilla con el contexto
+    return render(request, 'victima_app/lista_contratos.html', context)  # Renderizar la plantilla con el contexto
+
+# Crear en django una vista para almacenar en la base de datos un contrato
+def crear_contrato(request):
+    if request.method == 'POST':
+        fecha_inicio = request.POST.get('fecha_inicio')
+        fecha_fin = request.POST.get('fecha_fin')
+        etapa = request.POST.get('etapa')
+        beneficiarios = Beneficiarios.objects.all()  # Obtener todos los beneficiarios
+        beneficiarios_ids = [beneficiario.id for beneficiario in beneficiarios]  # Extraer los IDs
+        Contratos.objects.create(
+            fecha_inicio=fecha_inicio,
+            fecha_fin=fecha_fin,
+            etapa=etapa,
+            id_beneficiario_id=beneficiarios_ids[0]  # Asignar el primer beneficiario como ejemplo
+        )
+        return HttpResponseRedirect(reverse("login"))
+    return render(request, 'victima_app/crear_contratos.html')  # Renderizar la plantilla para crear un contrato
+
+def crear_beneficiario(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        documento_identidad = request.POST.get('documento_identidad')
+        Beneficiarios.objects.create(
+            nombre=nombre,
+            documento_identidad=documento_identidad
+        )
+        return HttpResponseRedirect(reverse("beneficiario_list"))  # Redirigir a la lista de beneficiarios después de crear uno
+    return render(request, 'victima_app/crear_beneficiario.html')  # Renderizar la plantilla para crear un contrato
 
 # Crear en django una vista que muestre un listado de   beneficiarios
 def beneficiary_list(request):

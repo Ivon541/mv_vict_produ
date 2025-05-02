@@ -1,24 +1,16 @@
+{% extends "aut_app/base_generica.html" %}
 {% if not user.is_authenticated %}
     <script>
         window.location.href = "{% url 'login' %}";
     </script>
 {% endif %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-
-    <h1>Aplicaciones del Proyecto</h1>
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h1>Aplicaciones Victimas</h1>
     <a href="{% url 'logout' %}">Cerrar sesión</a>
     <ul>
         {% for app in apps %}
             <li><a href="{{ app.url }}">{{ app.name }}</a></li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
