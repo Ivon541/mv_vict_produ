@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'victima_app',
     'aut_app',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

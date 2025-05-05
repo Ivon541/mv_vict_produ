@@ -1,0 +1,27 @@
+{% extends 'victima_app/base_generica.html' %}
+
+{% block content %}
+<h2>Editar Contrato</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="fecha_inicio">Fecha Inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ contrato.fecha_inicio }}" required>
+    </div>
+    <div>
+        <label for="fecha_fin">Fecha Fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" required>{{ contrato.fecha_fin }}</textarea>
+    </div>
+    <div>
+        <label for="etapa">Estado:</label>
+        <select id="etapa" name="etapa" required>
+            <option value="pre" {% if contrato.etapa == 'pre' %}selected{% endif %}>Precontractual</option>
+            <option value="liq" {% if contrato.etapa == 'liq' %}selected{% endif %}>Liquidacion</option>
+            <option value="con" {% if contrato.etapa == 'con' %}selected{% endif %}>Contractual</option>
+        </select>
+    </div>
+    <button type="submit">Guardar Cambios</button>
+    <a href="{% url 'contrato_list' %}">Cancelar</a>
+</form>
+{% endblock %}

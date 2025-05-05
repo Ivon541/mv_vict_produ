@@ -1,10 +1,10 @@
 {% extends "aut_app/base_generica.html" %}
 
-{%block title %}Registro{% endblock %}
+{% block title %}Registro{% endblock %}
 
-{%block content %}
+{% block content %}
     <h1>Crear Contrato</h1>
-    <form method="post"action="{% url 'crear_contrato' %}">
+    <form method="post" action="{% url 'crear_contrato' %}">
         {% csrf_token %}
         <div class="form-group">
             <label for="fecha_inicio">Fecha Inicio:</label>
@@ -16,11 +16,20 @@
         </div>
         <div class="form-group">
             <label for="etapa">Etapa:</label>
-            <select id="tipo_contrato" name="tipo_contrato" required>
+            <select id="etapa" name="etapa" required>
                 <option value="pre">Pre Ejecución</option>
                 <option value="eje">Ejecución</option>
                 <option value="liq">Liquidación</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="beneficiario">Beneficiario:</label>
+            <select id="beneficiario" name="beneficiario" required>
+                {% for beneficiario in beneficiarios %}
+                    <option value="{{ beneficiario.id_beneficiario }}">{{ beneficiario.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button type="submit">Guardar Contrato</button>
     </form>
     <a href="{% url 'contrato_list' %}">Volver a la lista de contratos</a>

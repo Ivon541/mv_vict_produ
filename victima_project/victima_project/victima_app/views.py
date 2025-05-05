@@ -1,14 +1,18 @@
 from django.shortcuts import render, redirect
-from victima_app.models import Contratos
+from victima_app.models import Contratos, Usuario
 from victima_app.models import Beneficiarios
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.models import Group, User
+from rest_framework import permissions, viewsets
+from .serializers import UsuarioSerializer, ContratosSerializer
 #from .forms import BeneficiarioForm 
 #from .forms import BeneficiarioForm
 
 
 # Crear en django una vista que muestre un listado de contratos
 def contrato_list(request):
+    pass
     contratos = Contratos.objects.all()  # Obtener los contratos de la base de datos
     context = {
         'contratos': contratos  # Pasar los contratos al contexto
@@ -17,20 +21,24 @@ def contrato_list(request):
 
 # Crear en django una vista para almacenar en la base de datos un contrato
 def crear_contrato(request):
+    beneficiarios = Beneficiarios.objects.all()  # Obtener todos los beneficiarios
     if request.method == 'POST':
         fecha_inicio = request.POST.get('fecha_inicio')
         fecha_fin = request.POST.get('fecha_fin')
         etapa = request.POST.get('etapa')
         beneficiarios = Beneficiarios.objects.all()  # Obtener todos los beneficiarios
-        beneficiarios_ids = [beneficiario.id for beneficiario in beneficiarios]  # Extraer los IDs
+        beneficiarios_ids = [beneficiario.id_beneficiario for beneficiario in beneficiarios]  # Extraer los IDs
         Contratos.objects.create(
             fecha_inicio=fecha_inicio,
             fecha_fin=fecha_fin,
             etapa=etapa,
             id_beneficiario_id=beneficiarios_ids[0]  # Asignar el primer beneficiario como ejemplo
         )
-        return HttpResponseRedirect(reverse("login"))
-    return render(request, 'victima_app/crear_contratos.html')  # Renderizar la plantilla para crear un contrato
+        return HttpResponseRedirect(reverse("contrato_list"))
+    context = {
+        'beneficiarios': beneficiarios  # Pasar los beneficiarios al contexto
+    }
+    return render(request, 'victima_app/crear_contratos.html', context)  # Renderizar la plantilla para crear un contrato
 
 def crear_beneficiario(request):
     if request.method == 'POST':
@@ -78,6 +86,73 @@ def update_beneficiary(request, beneficiary_id):
         form = BeneficiarioForm(instance=beneficiario)  # Mostrar datos actuales en el formulario
 
     return render(request, 'victima/actualizar_beneficiario.html', {'form': form, 'beneficiario': beneficiario}) # Renderizar la plantilla para actualizar un beneficiario
+
+class ContratosViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Contratos.objects.all()
+    serializer_class = ContratosSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class UsuarioViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+def buscar_beneficiario(request):
+    query = request.GET.get('q')  # Obtener el término de búsqueda desde el parámetro 'q'
+    if query:
+        beneficiarios = Beneficiarios.objects.filter(nombre__icontains=query)  # Filtrar beneficiarios por nombre
+    else:
+        beneficiarios = Beneficiarios.objects.all()  # Mostrar todos los beneficiarios si no hay búsqueda
+    context = {
+        'beneficiarios': beneficiarios,  # Pasar los beneficiarios al contexto
+        'query': query  # Pasar el término de búsqueda al contexto
+    }
+    return render(request, 'victima_app/lista_contratos.html', context)  # Renderizar la plantilla con el contexto
+
+
+def detalle_beneficiario(request, beneficiario_id):
+    beneficiario = Beneficiarios.objects.get(id=beneficiario_id)  # Obtener el beneficiario por ID
+    context = {
+        'beneficiario': beneficiario  # Pasar el beneficiario al contexto
+        }
+    return render(request, 'victima_app/detalle_beneficiario.html', context)  # Renderizar la plantilla con el contexto
+
+def editar_contrato(request, id_contrato):
+    contrato = Contratos.objects.get(pk=id_contrato)  # Obtener el contrato por ID
+
+    if request.method == 'POST':
+        contrato.fecha_inicio = request.POST.get('fecha_inicio')
+        contrato.fecha_fin = request.POST.get('fecha_fin')
+        contrato.etapa = request.POST.get('etapa')
+        contrato.save()  # Guardar los cambios en la base de datos
+        return redirect('contrato_list')  # Redirigir a la lista de contratos
+
+    context = {
+        'contrato': contrato  # Pasar el contrato al contexto
+    }
+    return render(request, 'victima_app/editar_contrato.html', context)  # Renderizar la plantilla para editar un contrato
+
+
+def eliminar_contrato(request, id_contrato):
+    contrato = Contratos.objects.get(pk=id_contrato)  # Obtener el contrato por ID
+
+    if request.method == 'POST':
+        contrato.delete()  # Eliminar el contrato de la base de datos
+        return redirect('contrato_list')  # Redirigir a la lista de contratos
+
+    context = {
+        'contrato': contrato  # Pasar el contrato al contexto
+    }
+    return render(request, 'victima_app/eliminar_contrato.html', context)  # Renderizar la plantilla para confirmar la eliminación
 
 
 

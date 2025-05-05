@@ -2,9 +2,49 @@
 
 {% block content %}
     <h1>Listado de Contratos</h1>
+    <a href="{% url 'crear_contrato' %}">Crear nuevo contrato</a>
+    
+    {% comment %} <h2>Búsqueda de Beneficiarios</h2>
+    <form method="get" action="{% url 'buscar_beneficiario' %}">
+        <label for="documento_identidad">Documento de Identidad:</label>
+        <input type="text" id="documento_identidad" name="documento_identidad" placeholder="Ingrese documento">
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if beneficiarios %}
+        <h3>Resultados de la búsqueda</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Documento de Identidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for beneficiario in beneficiarios %}
+                    <tr>
+                        <td>{{ beneficiario.nombre }}</td>
+                        <td>{{ beneficiario.documento_identidad }}</td>
+                        <td>
+                            <a href="{% url 'detalle_beneficiario' beneficiario.id_beneficiario %}">Ver Detalle</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif request.GET.documento_identidad %}
+        <p>No se encontraron beneficiarios con ese documento de identidad.</p>
+    {% endif %} {% endcomment %}
+
+    <h2>Contratos</h2>
     <ul>
         {% for contrato in contratos %}
-            <li>{{ contrato.nombre }} - {{ contrato.fecha }}</li>
+            <li>
+                {{ contrato.id_beneficiario_id }} - {{ contrato.etapa }}
+                <a href="{% url 'editar_contrato' contrato.id_contrato %}">Editar</a>
+                <a href="{% url 'eliminar_contrato' contrato.id_contrato %}">Eliminar</a>
+            </li>
         {% empty %}
             <li>No hay contratos disponibles.</li>
         {% endfor %}
