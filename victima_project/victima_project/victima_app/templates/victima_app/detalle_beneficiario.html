@@ -1,0 +1,22 @@
+<!-- detalle_beneficiario.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Beneficiario</title>
+</head>
+<body>
+    <h1>Detalle de Beneficiario</h1>
+    <a href="{% url 'victima_app:lista_contratos' %}">Volver a la lista de contratos</a>
+    <hr>
+    <div>
+        <h2>{{ beneficiario.nombre }}</h2>
+        <p><strong>Identificación:</strong> {{ beneficiario.identificacion }}</p>
+        <p><strong>Edad:</strong> {{ beneficiario.edad }}</p>
+        <p><strong>Dirección:</strong> {{ beneficiario.direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ beneficiario.telefono }}</p>
+        <p><strong>Email:</strong> {{ beneficiario.email }}</p>
+    </div>
+</body>
+</html>

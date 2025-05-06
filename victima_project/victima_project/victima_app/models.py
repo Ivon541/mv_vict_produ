@@ -16,7 +16,15 @@ class Usuario(models.Model):
 class Beneficiarios(models.Model):
     id_beneficiario = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    documento_identidad = models.CharField(max_length=20, unique=True)
+    apellido = models.CharField(max_length=100,default='nn')
+    tipo_documento = models.CharField(max_length=50,default='nn')
+    documento_identidad = models.CharField(max_length=20, unique=True,default='nn')
+    fecha_nacimiento = models.DateField(default='2000-01-01')
+    direccion = models.CharField(max_length=255,default='nn')
+    telefono = models.CharField(max_length=15,default='nn')
+    email = models.EmailField(default='nn')
+    fecha_registro = models.DateField(default='2000-01-01') 
+    
     
 class Contratos(models.Model):
     ETAPA = {
@@ -29,11 +37,21 @@ class Contratos(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     etapa = models.CharField(max_length=20, choices=ETAPA)
+    monto = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    fecha_registro = models.DateField(default='2000-01-01')
+    tipo_contrato = models.CharField(max_length=50,default='nn')
+    objecto = models.TextField(default='nn')
+    
     
 class Productos(models.Model):
     id_producto = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
+    valor_unitario = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    cantidad = models.IntegerField(default=0)
+    fecha_entrada = models.DateField(default='2000-01-01')
+    fecha_salida = models.DateField(default='2000-01-01')
+    
 
 class Entregas(models.Model):
     id_entrega = models.AutoField(primary_key=True)
@@ -45,7 +63,10 @@ class Entregas(models.Model):
 class Programas(models.Model):
     id_programa = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
+    tipo_programa = models.CharField(max_length=50,default='nn')
+    fecha_inicio = models.DateField(default='2000-01-01')
+    fecha_finalizacion = models.DateField(default='2000-01-01')
+    descripcion = models.TextField(default='nn')
 
 class BeneficiarioProgramas(models.Model):  
     id_beneficiario = models.ForeignKey(Beneficiarios,on_delete=models.CASCADE)
