@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from victima_app.models import Contratos
 from victima_app.models import Beneficiarios
+from victima_app.models import Entregas
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.generic import ListView
 #from .forms import BeneficiarioForm 
 #from .forms import BeneficiarioForm
 
@@ -65,7 +67,7 @@ def create_beneficiary(request):
     return render(request, 'victima/crear_beneficiario.html', {'form': form}) # Renderizar la plantilla para crear un beneficiario
 
 
-# Crear en django una vista  para eliminar un beneficiario de la base de datos
+# Crear en django una vista  para actualizar un beneficiario de la base de datos
 def update_beneficiary(request, beneficiary_id):
     beneficiario = get_object_or_404(Beneficiario, id=beneficiary_id)  # Obtén el beneficiario de la BD
 
@@ -92,4 +94,44 @@ class BeneficiarioListView(ListView):
     
 def lista_beneficiario(request):
     beneficiarios = Beneficiarios.objects.all()
-    return render(request, 'victima_app/lista_beneficiarios.html', {'beneficiarios': beneficiarios}) 
+    return render(request, 'victima_app/lista_beneficiarios.html', {'beneficiarios': beneficiarios})
+
+#elimiar un beneficiario de la base de datos
+def delete_beneficiary(request, beneficiary_id):
+    beneficiario = get_object_or_404(Beneficiarios, id=beneficiary_id)  # Obtén el beneficiario de la BD
+    if request.method == 'POST':
+        beneficiario.delete()  # Eliminar el beneficiario
+        return redirect('lista_beneficiarios')  # Redirige después de la eliminación
+    return render(request, 'victima/eliminar_beneficiario.html', {'beneficiario': beneficiario})  # Confirmar eliminación
+
+# Crear en django una vista que muestre un listado de entregas
+def entregas_list(request):
+    entregas= Entregas.objects.all()  # Obtener lista de entregas de la base de datos
+    context = {
+        'entregas': entregas  # Pasar los entregas al contexto
+    }
+    return render(request, 'victima_app/lista_entregas.html', context)
+
+#crear una vista en django para crear una entrega
+
+def crear_entregas(request):
+    if request.method == 'POST':
+        cantidad = request.POST.get('cantidad')
+        fecha_entrega = request.POST.get('fecha_entrega')
+        contrato = contrato.objects.all()  # Obtener todas las entregas
+        contrato_ids = [contrato.id for contrato in contrato]  # Extraer los IDs
+        contrato.objects.create(
+            cantidad=cantidad,
+            fecha_entrega=fecha_entrega,
+            id_contrato_id=contrato_ids[0]  # Asignar el primer beneficiario como ejemplo
+        )
+        return HttpResponseRedirect(reverse("login"))
+    return render(request, 'victima_app/crear_entregas.html')  # Renderizar la plantilla para crear un entrega
+ 
+# Crear en django una vista que muestre un listado de entregas
+def entregas_list(request):
+    entregas= Entregas.objects.all()  # Obtener lista de entregas de la base de datos
+    context = {
+        'entregas': entregas  # Pasar los entregas al contexto
+    }
+    return render(request, 'victima_app/lista_entregas.html', context)

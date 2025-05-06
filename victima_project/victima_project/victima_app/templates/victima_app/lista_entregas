@@ -1,0 +1,12 @@
+{% extends "aut_app/base_generica.html" %}
+
+{% block content %}
+    <h1>Listado de Entregas</h1>
+    <ul>
+        {% for entregas in entregas %}
+            <li>{{ entregas.cantidad }} - {{ entregas.fecha }}</li>
+        {% empty %}
+            <li>No hay Entregas disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
