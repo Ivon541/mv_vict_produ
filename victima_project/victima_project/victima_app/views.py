@@ -158,6 +158,57 @@ def eliminar_contrato(request, id_contrato):
 
 
 
+
+def buscar_beneficiario(request):
+    query = request.GET.get('q')  # Obtener el término de búsqueda desde el parámetro 'q'
+    if query:
+        beneficiarios = Beneficiarios.objects.filter(nombre__icontains=query)  # Filtrar beneficiarios por nombre
+    else:
+        beneficiarios = Beneficiarios.objects.all()  # Mostrar todos los beneficiarios si no hay búsqueda
+    context = {
+        'beneficiarios': beneficiarios,  # Pasar los beneficiarios al contexto
+        'query': query  # Pasar el término de búsqueda al contexto
+    }
+    return render(request, 'victima_app/lista_contratos.html', context)  # Renderizar la plantilla con el contexto
+
+
+def detalle_beneficiario(request, beneficiario_id):
+    beneficiario = Beneficiarios.objects.get(id=beneficiario_id)  # Obtener el beneficiario por ID
+    context = {
+        'beneficiario': beneficiario  # Pasar el beneficiario al contexto
+        }
+    return render(request, 'victima_app/detalle_beneficiario.html', context)  # Renderizar la plantilla con el contexto
+
+def editar_contrato(request, id_contrato):
+    contrato = Contratos.objects.get(pk=id_contrato)  # Obtener el contrato por ID
+
+    if request.method == 'POST':
+        contrato.fecha_inicio = request.POST.get('fecha_inicio')
+        contrato.fecha_fin = request.POST.get('fecha_fin')
+        contrato.etapa = request.POST.get('etapa')
+        contrato.save()  # Guardar los cambios en la base de datos
+        return redirect('contrato_list')  # Redirigir a la lista de contratos
+
+    context = {
+        'contrato': contrato  # Pasar el contrato al contexto
+    }
+    return render(request, 'victima_app/editar_contrato.html', context)  # Renderizar la plantilla para editar un contrato
+
+
+def eliminar_contrato(request, id_contrato):
+    contrato = Contratos.objects.get(pk=id_contrato)  # Obtener el contrato por ID
+
+    if request.method == 'POST':
+        contrato.delete()  # Eliminar el contrato de la base de datos
+        return redirect('contrato_list')  # Redirigir a la lista de contratos
+
+    context = {
+        'contrato': contrato  # Pasar el contrato al contexto
+    }
+    return render(request, 'victima_app/eliminar_contrato.html', context)  # Renderizar la plantilla para confirmar la eliminación
+
+
+
 class BeneficiarioListView(ListView):
     model = Beneficiarios
     template_name = 'lista_beneficiarios.html'
