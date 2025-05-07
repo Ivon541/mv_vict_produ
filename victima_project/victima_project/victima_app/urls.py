@@ -10,6 +10,7 @@ urlpatterns = [
     path('beneficiarios/', views.contrato_list, name='beneficiario_list'),  # Listar contratos
     path('buscar_beneficiario/', views.buscar_beneficiario, name='buscar_beneficiario'),  # Buscar beneficiario
     path('detalle_beneficiario/<int:id>/', views.detalle_beneficiario, name='detalle_beneficiario'),  # Detalle beneficiario
+    path('lista_beneficiarios/', views.beneficiary_list, name='lista_beneficiarios'),  # Listar beneficiarios
     path('editar_contrato/<int:id_contrato>/', views.editar_contrato, name='editar_contrato'),  # Editar contrato
     path('eliminar_contrato/<int:id_contrato>/', views.eliminar_contrato, name='eliminar_contrato'),  # Eliminar contrato
     #path('', views.home, name='home'),

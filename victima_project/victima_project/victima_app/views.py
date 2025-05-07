@@ -60,7 +60,7 @@ def beneficiary_list(request):
     context = {
         'beneficiarios': beneficiario  # Pasar los beneficiarios al contexto
     }
-    return render(request, 'victima/lista_beneficiarios.html', context)  # Renderizar la plantilla con el contexto
+    return render(request, 'victima/lista_beneficiario.html', context)  # Renderizar la plantilla con el contexto
 
 #Crear en django una vista  para almacenar en la base de  datos  un beneficiario
 def create_beneficiary(request):

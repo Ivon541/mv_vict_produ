@@ -14,9 +14,8 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("inicio"))
-        else:
-            return render(request, "aut_app/dashboard.html", {"error": "Invalid username or password"})
+            return HttpResponseRedirect(reverse("dashboard"))
+        return render(request, "aut_app/login.html", {"error": "Invalid username or password"})
     return render(request, "aut_app/login.html")
 
 def inicio_view(request):
