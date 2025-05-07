@@ -4,8 +4,9 @@ body {
     font-family: 'Inter', sans-serif;
     /*background: url('/static/aut_app/images/background.jpg') no-repeat center center fixed;*/
     background-size: cover;
-    color: #333;
+    color: #fff;
 }
+
 
 footer {
     font-size: 14px;
@@ -88,7 +89,6 @@ footer {
 
 
 
-
 /*Botones*/
 .btn-dark {
     background-color: #222;
@@ -150,6 +150,54 @@ footer {
     display: flex;
     background-size: cover;
 }
+
+
+/* Diseño de Tablas */
+/* Mejorando la tabla */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Botones */
+.btn-sm {
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+/* Contenedor */
+.container {
+    max-width: 900px;
+}
+
+
+/* Estilos para el formulario */
+.card {
+    border-radius: 12px;
+    border: none;
+}
+
+.shadow-lg {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones */
+.btn-success {
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+
+
+
 
 
 

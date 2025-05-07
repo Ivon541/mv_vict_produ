@@ -1,27 +1,45 @@
-{% extends 'victima_app/base_generica.html' %}
+{% extends 'aut_app/base_generica.html' %}
 
 {% block content %}
-<h2>Editar Contrato</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-4">
+                <h2 class="fw-bold text-center text-success">Editar Contrato</h2>
 
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <label for="fecha_inicio">Fecha Inicio:</label>
-        <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ contrato.fecha_inicio }}" required>
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha_inicio" class="form-label">Fecha Inicio:</label>
+                            <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" value="{{ contrato.fecha_inicio }}" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha_fin" class="form-label">Fecha Fin:</label>
+                            <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="{{ contrato.fecha_fin }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="etapa" class="form-label">Estado:</label>
+                            <select id="etapa" name="etapa" class="form-select" required>
+                                <option value="pre" {% if contrato.etapa == 'pre' %}selected{% endif %}>Precontractual</option>
+                                <option value="liq" {% if contrato.etapa == 'liq' %}selected{% endif %}>Liquidación</option>
+                                <option value="con" {% if contrato.etapa == 'con' %}selected{% endif %}>Contractual</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Guardar Cambios</button>
+                        <a href="{% url 'contrato_list' %}" class="btn btn-outline-secondary btn-lg ms-2">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="fecha_fin">Fecha Fin:</label>
-        <input type="date" id="fecha_fin" name="fecha_fin" required>{{ contrato.fecha_fin }}</textarea>
-    </div>
-    <div>
-        <label for="etapa">Estado:</label>
-        <select id="etapa" name="etapa" required>
-            <option value="pre" {% if contrato.etapa == 'pre' %}selected{% endif %}>Precontractual</option>
-            <option value="liq" {% if contrato.etapa == 'liq' %}selected{% endif %}>Liquidacion</option>
-            <option value="con" {% if contrato.etapa == 'con' %}selected{% endif %}>Contractual</option>
-        </select>
-    </div>
-    <button type="submit">Guardar Cambios</button>
-    <a href="{% url 'contrato_list' %}">Cancelar</a>
-</form>
+</div>
 {% endblock %}

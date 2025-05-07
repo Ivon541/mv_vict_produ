@@ -1,13 +1,18 @@
-{% extends 'victima_app/base_generica.html' %}
+{% extends 'aut_app/base_generica.html' %}
 
 {% block content %}
-<h2>Eliminar Contrato</h2>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-5 text-center">
+        <h2 class="fw-bold text-danger">Eliminar Contrato</h2>
+        <p class="fs-5 text-muted">¿Estás seguro de que deseas eliminar el contrato <strong>{{ contrato.nombre }}</strong>?</p>
 
-<p>¿Estás seguro de que deseas eliminar el contrato <strong>{{ contrato.nombre }}</strong>?</p>
-
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Eliminar</button>
-    <a href="{% url 'contrato_list' %}">Cancelar</a>
-</form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mt-4">
+                <button type="submit" class="btn btn-danger btn-lg">Eliminar</button>
+                <a href="{% url 'contrato_list' %}" class="btn btn-outline-secondary btn-lg ms-3">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
