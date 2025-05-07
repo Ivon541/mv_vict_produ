@@ -1,16 +1,56 @@
 {% extends "aut_app/base_generica.html" %}
+
 {% if not user.is_authenticated %}
     <script>
         window.location.href = "{% url 'login' %}";
     </script>
 {% endif %}
+
 {% block title %}Dashboard{% endblock %}
+
 {% block content %}
-    <h1>Aplicaciones Victimas</h1>
-    <a href="{% url 'logout' %}">Cerrar sesión</a>
-    <ul>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <h1 class="fw-bold text-success">Modulo Gestión de Programas</h1>
+        </div>
+    </div>
+
+    <div class="row mt-4">
         {% for app in apps %}
-            <li><a href="{{ app.url }}">{{ app.name }}</a></li>
+        <div class="col-md-4">
+            <div class="card hover-effect p-3">
+                <h5 class="card-title fw-bold">{{ app.name }}</h5>
+                <a class="btn btn-primary mt-2" href="{{ app.url }}">Abrir</a>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+        
+        <!-- Enlace específico para Crear Contratos -->
+        <div class="col-md-4">
+            <div class="card hover-effect p-3">
+                <h5 class="card-title fw-bold">Contratos</h5>
+                <a class="btn btn-success mt-2" href="{% url 'contrato_list' %}">Acceder</a>
+            </div>
+        </div>
+
+         <!-- Enlace específico para crear programas para Victimas del Conflicto Armado -->
+         <div class="col-md-4">
+            <div class="card hover-effect p-3">
+                <h5 class="card-title fw-bold">Programas</h5>
+                <a class="btn btn-success mt-2" href="{% url 'beneficiario_list' %}">Acceder</a>
+            </div>
+        </div>
+
+         <!-- Enlace específico para ingresar Victimas del Conflicto Armado -->
+         <div class="col-md-4">
+            <div class="card hover-effect p-3">
+                <h5 class="card-title fw-bold">Beneficiarios</h5>
+                <a class="btn btn-success mt-2" href="{% url 'beneficiario_list' %}">Acceder</a>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
 {% endblock %}
