@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.models import Group, User
 from rest_framework import permissions, viewsets
 from .serializers import UsuarioSerializer, ContratosSerializer
+from django.contrib.auth.decorators import login_required
 #from .forms import BeneficiarioForm 
 #from .forms import BeneficiarioForm
 
@@ -17,10 +18,16 @@ def contrato_list(request):
     context = {
         'contratos': contratos  # Pasar los contratos al contexto
     }
-    return render(request, 'victima_app/lista_contratos.html', context)  # Renderizar la plantilla con el contexto
+    if request.user.is_authenticated:
+        return render(request, 'victima_app/lista_contratos.html', context)  # Renderizar la plantilla con el contexto
+    else:
+        return HttpResponseRedirect(reverse("login"))
+    
 
 # Crear en django una vista para almacenar en la base de datos un contrato
+
 def crear_contrato(request):
+    
     beneficiarios = Beneficiarios.objects.all()  # Obtener todos los beneficiarios
     if request.method == 'POST':
         fecha_inicio = request.POST.get('fecha_inicio')
@@ -38,7 +45,11 @@ def crear_contrato(request):
     context = {
         'beneficiarios': beneficiarios  # Pasar los beneficiarios al contexto
     }
-    return render(request, 'victima_app/crear_contratos.html', context)  # Renderizar la plantilla para crear un contrato
+    if request.user.is_authenticated:
+        return render(request, 'victima_app/crear_contratos.html', context)  # Renderizar la plantilla para crear un contrato
+    else:
+        return HttpResponseRedirect(reverse("login"))
+    
 
 def crear_beneficiario(request):
     if request.method == 'POST':

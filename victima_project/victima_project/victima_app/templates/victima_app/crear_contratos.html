@@ -1,5 +1,11 @@
 {% extends "aut_app/base_generica.html" %}
 
+{% if not user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'login' %}";
+    </script>
+{% endif %}
+
 {% block title %}Registro{% endblock %}
 
 {% block content %}
