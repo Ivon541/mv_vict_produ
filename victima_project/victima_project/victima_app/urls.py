@@ -1,6 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 from . import views
+from django.urls import path
+from .views import lista_beneficiario, update_beneficiary, beneficiary_list # Importa la vista que deseas usar
+
 
 urlpatterns = [
     path('contratos/', views.contrato_list, name='contrato_list'),  # Listar contratos
