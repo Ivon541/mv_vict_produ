@@ -1,18 +1,23 @@
 from . import views
 from django.urls import path
-from .views import lista_beneficiario, update_beneficiary, beneficiary_list # Importa la vista que deseas usar
+from .views import beneficiary_list, crear_beneficiario, eliminar_beneficiario # Importa la vista que deseas usar
 
 
 urlpatterns = [
     path('contratos/', views.contrato_list, name='contrato_list'),  # Listar contratos
     path('crear-contrato/', views.crear_contrato, name='crear_contrato'),  # Crear contrato
-    path('crear-beneficiario/', views.crear_beneficiario, name='crear_beneficiarios'),  # Crear beneficiario
+    path('crear-beneficiario/', views.crear_beneficiario, name='crear_beneficiario'),  # Crear beneficiario
     path('beneficiarios/', views.contrato_list, name='beneficiario_list'),  # Listar contratos
+    path('eliminar-beneficiario/<int:id_beneficiario>/', views.eliminar_beneficiario, name='eliminar_beneficiario'),  # Eliminar beneficiario
+    path('editar-beneficiario/<int:id_beneficiario>/', views.editar_beneficiario, name='editar_beneficiario'),  # Editar beneficiario
     path('buscar_beneficiario/', views.buscar_beneficiario, name='buscar_beneficiario'),  # Buscar beneficiario
     path('detalle_beneficiario/<int:id>/', views.detalle_beneficiario, name='detalle_beneficiario'),  # Detalle beneficiario
-    path('lista_beneficiarios/', views.beneficiary_list, name='lista_beneficiarios'),  # Listar beneficiarios
+    path('lista-beneficiarios/', views.beneficiary_list, name='lista_beneficiarios'),  # Listar beneficiarios
     path('editar_contrato/<int:id_contrato>/', views.editar_contrato, name='editar_contrato'),  # Editar contrato
     path('eliminar_contrato/<int:id_contrato>/', views.eliminar_contrato, name='eliminar_contrato'),  # Eliminar contrato
+    path('crear-programas/', views.crear_programa, name='crear_programas'),  # Crear programa
+    path('lista-programas/', views.lista_programas, name='lista_programas'),  # Lista programa
+    path('editar-programa/<int:id_programa>/', views.editar_programa, name='editar_programa'),
     #path('', views.home, name='home'),
     #path('detalle/<int:id>/', views.detalle, name='detalle'),
     #path('crear/', views.crear, name='crear'),

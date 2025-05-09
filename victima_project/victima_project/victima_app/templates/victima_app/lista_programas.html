@@ -7,9 +7,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="fw-bold text-success">Listado de Beneficiarios</h1>
-    <a class="btn btn-primary mb-3" href="{% url 'crear_beneficiario' %}">Crear nuevo beneficiario</a>
-    <a class="btn btn-primary mb-3" href="{% url 'dashboard' %}">Tablero de Gestión</a>
+    <h1 class="fw-bold text-success">Listado de Programas</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'crear_programas' %}">Crear nuevo Programa</a>
 
     {% comment %}
     <h2 class="fw-bold text-secondary">Búsqueda de Beneficiarios</h2>
@@ -30,7 +29,6 @@
                         <th>Documento de Identidad</th>
                         <th>Acciones</th>
                     </tr>
-                    </tr>
                 </thead>
                 <tbody>
                     {% for beneficiario in beneficiarios %}
@@ -50,37 +48,35 @@
     {% endif %}
     {% endcomment %}
 
-    <h2 class="fw-bold text-secondary mt-4">Beneficiario</h2>
+    <h2 class="fw-bold text-secondary mt-4">Programas</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-success">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Documento Identidad</th>
-                    <th>Email</th>
+                    <th>Programa</th>
+                    <th>Tipo de Programa</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for beneficiario in beneficiarios %}
+                {% for contrato in contratos %}
                 <tr>
-                    <td>{{ beneficiario.nombre }}</td>
-                    <td>{{ beneficiario.apellido }}</td>
-                    <td>{{ beneficiario.documento_identidad }}</td>
-                    <td>{{ beneficiario.email }}</td>
+                    <td>{{ programa.nombre }}</td>
+                    <td>{{ programa.tipo_programa }}</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="{% url 'editar_beneficiario' beneficiario.id_beneficiario %}">Editar</a>
-                        <a class="btn btn-danger btn-sm" href="{% url 'eliminar_beneficiario' beneficiario.id_beneficiario %}">Eliminar</a>
+                        <a class="btn btn-warning btn-sm" href="{% url 'editar_programa' programa.id_programa %}">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'eliminar_programa' programa.id_programa %}">Eliminar</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="4" class="text-center text-muted">No existe beneficiario.</td>
+                    <td colspan="3" class="text-center text-muted">No hay Programas disponibles.</td>
                 </tr>
                 {% endfor %}
-            </tbody>
         </table>
+        <div class="text-center">
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
+        </div>
     </div>
 </div>
 {% endblock %}

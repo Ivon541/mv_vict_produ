@@ -1,4 +1,9 @@
 {% extends "aut_app/base_generica.html" %}
+{% if not user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'login' %}";
+    </script>
+{% endif %}
 
 {% block content %}
 <div class="container mt-5">
@@ -70,6 +75,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="text-center">
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
+        </div>
     </div>
 </div>
 {% endblock %}

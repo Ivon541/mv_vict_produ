@@ -1,22 +1,84 @@
 {% extends "aut_app/base_generica.html" %}
 
-{%block title %}Registro{% endblock %}
+{% block title %}Registro{% endblock %}
 
-{%block content %}
-    <h1>Crear Beneficiarios</h1>
-    <form method="post"action="{% url 'crear_beneficiarios' %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+{% block content %}
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="card shadow-lg p-4">
+                <h2 class="fw-bold text-center text-success">Crear Beneficiario</h2>
+                
+                <form method="post" action="{% url 'crear_beneficiario' %}">
+                    {% csrf_token %}
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nombre" class="form-label">Nombres:</label>
+                            <input type="nombre" id="nombre" name="nombre" class="form-control" required>      
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="apellido" class="form-label">Apellidos:</label>
+                            <input type="apellido" id="apellido" name="apellido" class="form-control" required>         
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="tipo_documento" class="form-label">Tipo Documento:</label>
+                            <select id="tipo_documento" name="tipo_documento" class="form-select" required>
+                                <option value="cc">Cedula Ciudadania</option>
+                                <option value="ti">Tarjeta Identidad</option>
+                                <option value="rc">Registro civil</option>
+                            </select>
+                        </div>
+                             
+                        <div class="col-md-6 mb-3">
+                            <label for="documento_identidad" class="form-label">Documento Identidad:</label>
+                            <input type="documento_identidad" id="documento_identidad" name="documento_identidad" class="form-control" required> 
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="direccion" class="form-label">Dirección:</label>
+                            <input type="direccion" id="direccion" name="direccion" class="form-control" required> 
+                        </div>
+                    
+                        <div class="col-md-6 mb-3">
+                            <div class="mb-3">
+                                <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
+                                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" required>
+                            </div>    
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="telefono" class="form-label">Telefono:</label>
+                            <input type="telefono" id="telefono" name="telefono" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                    </div> 
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha_registro" class="form-label">Fecha de Registro:</label>
+                            <input type="date" id="fecha_registro" name="fecha_registro" class="form-control" required>
+                        </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg">Guardar Beneficiario</button>
+                        <a href="{% url 'lista_beneficiarios' %}" class="btn btn-outline-secondary btn-lg mt-2">Volver</a>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="documento_identidad">Numero Documento</label>
-            <input type="text" id="documento_identidad" name="documento_identidad" required>
-        </div>
-        
-        <button type="submit">Guardar Beneficiario</button>
-    </form>
-    <a href="{% url 'beneficiario_list' %}">Volver a la lista de contratos</a>
+    </div>
+</div>
 {% endblock %}
 

@@ -1,0 +1,46 @@
+{% extends 'aut_app/base_generica.html' %}
+{% if not user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'login' %}";
+    </script>
+{% endif %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-4">
+                <h2 class="fw-bold text-center text-success">Editar Programa</h2>
+
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nombre" class="form-label">Nombre del programa:</label>
+                            <input type="nombre" id="nombre" name="nombre" class="form-control" required>  
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha_inicio" class="form-label">Fecha de Inicio:</label>
+                            <label for="fecha_inicio" class="form-label">Fecha de Inicio:</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha_finalizacion" class="form-label">Fecha de Finalizacion:</label>
+                            <input type="date" id="fecha_finalizacion" name="fecha_finalizacion" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Guardar Cambios</button>
+                        <a href="{% url 'lista_programas' %}" class="btn btn-outline-secondary btn-lg ms-2">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

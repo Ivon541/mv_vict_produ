@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg p-4">
-                <h2 class="fw-bold text-center text-success">Editar Contrato</h2>
+                <h2 class="fw-bold text-center text-success">Editar </h2>
 
                 <form method="post">
                     {% csrf_token %}
@@ -36,7 +36,7 @@
 
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success btn-lg">Guardar Cambios</button>
-                        <a href="{% url 'contrato_list' %}" class="btn btn-outline-secondary btn-lg ms-2">Cancelar</a>
+                        <a href="{% url 'crear_beneficiario' %}" class="btn btn-outline-secondary btn-lg ms-2">Cancelar</a>
                     </div>
                 </form>
             </div>
