@@ -18,6 +18,7 @@ urlpatterns = [
     path('crear-programas/', views.crear_programa, name='crear_programas'),  # Crear programa
     path('lista-programas/', views.lista_programas, name='lista_programas'),  # Lista programa
     path('editar-programa/<int:id_programa>/', views.editar_programa, name='editar_programa'),
+    path('eliminar-programa/<int:id_programa>/', views.eliminar_programa, name='eliminar_programa'),  # Eliminar programa
     #path('', views.home, name='home'),
     #path('detalle/<int:id>/', views.detalle, name='detalle'),
     #path('crear/', views.crear, name='crear'),

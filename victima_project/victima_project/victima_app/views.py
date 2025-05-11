@@ -318,28 +318,30 @@ def entregas_list(request):
 
 #crear una vista en django para crear un programa
 def crear_programa(request):
-    programa = Programas.objects.get(pk=id_programas)
+    programa = Programas.objects.all()
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         tipo_programa = request.POST.get('tipo_programa')
         descripcion = request.POST.get('descripcion')
         fecha_inicio = request.POST.get('fecha_inicio')
-        fecha_fin = request.POST.get('fecha_fin')
+        fecha_finalizacion = request.POST.get('fecha_fin')
+        
         Programas.objects.create(
             nombre=nombre,
             tipo_programa=tipo_programa,
             descripcion=descripcion,
             fecha_inicio=fecha_inicio,
-            fecha_fin=fecha_fin,
+            fecha_finalizacion=fecha_finalizacion,
         )
         return HttpResponseRedirect(reverse('lista_programas'))
         context = {
-        'programas': programas  # Pasar los beneficiarios al contexto
-        }   
-        return render(request, 'victima_app/crear_programas.html')  # Renderizar la plantilla para crear un programa
+        'programa': programa # Pasar los beneficiarios al contexto
+    }   
+    return render(request, 'victima_app/crear_programas.html')  # Renderizar la plantilla para crear un programa
 
 # Crear en django una vista que muestre un listado de programas
 def lista_programas(request):
+    programa = Programas.objects.all()  # Obtener lista de programas de la base de datos
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         tipo_programa = request.POST.get('tipo_programa')
@@ -353,8 +355,13 @@ def lista_programas(request):
         context = {
         'programas': programa  # Pasar los beneficiarios al contexto
     }
-    return render(request,'victima_app/lista_programas.html') # Renderizar la plantilla con el contexto
+        
+    context = {
+        'programas': programa  # Pasar los beneficiarios al contexto
+    }
+    return render(request,'victima_app/lista_programas.html', context) # Renderizar la plantilla con el contexto
 
+ 
 def editar_programa(request, id_programa):
     programa = Programas.objects.get(pk=id_programa)  # Obtener el programa por ID
 
@@ -370,15 +377,15 @@ def editar_programa(request, id_programa):
     return render(request, 'victima_app/editar_programa.html', context)  # Renderizar la plantilla para editar un contrato
 
 
-def eliminar_contrato(request, id_contrato):
-    contrato = Contratos.objects.get(pk=id_contrato)  # Obtener el contrato por ID
+def eliminar_programa(request, id_programa):
+    programa = Programas.objects.get(pk=id_programa)  # Obtener el contrato por ID
 
     if request.method == 'POST':
-        contrato.delete()  # Eliminar el contrato de la base de datos
-        return redirect('contrato_list')  # Redirigir a la lista de contratos
+        programa.delete()  # Eliminar el contrato de la base de datos
+        return redirect('programa_list')  # Redirigir a la lista de contratos
 
     context = {
-        'contrato': contrato  # Pasar el contrato al contexto
+        'Programas': Programas  # Pasar el contrato al contexto
     }
-    return render(request, 'victima_app/eliminar_contrato.html', context)  # Renderizar la plantilla para confirmar la eliminación
+    return render(request, 'victima_app/eliminar_programa.html', context)  # Renderizar la plantilla para confirmar la eliminación
 
