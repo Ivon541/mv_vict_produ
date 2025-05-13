@@ -76,16 +76,12 @@ def dashboard_view(request):
         return HttpResponseRedirect(reverse("login"))
     
 def equipo_view(request):
-    if request.user.is_authenticated:
-        return render(request, "aut_app/equipo.html")
-    else:
-        return HttpResponseRedirect(reverse("login"))
+    return render(request, "aut_app/equipo.html")
+
 
 def contacto_view(request):
-    if request.user.is_authenticated:
-        return render(request, "aut_app/contacto.html")
-    else:
-        return HttpResponseRedirect(reverse("login"))
+    return render(request, "aut_app/contacto.html")
+    
     
     
 
