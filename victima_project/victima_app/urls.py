@@ -25,6 +25,7 @@ urlpatterns = [
     path('crear-entregas/', views.crear_entrega, name='crear_entregas'),  # Crear programa
     path('eliminar-entrega/<int:id_entrega>/', views.eliminar_entrega, name='eliminar_entrega'),
     path('editar-entrega/<int:id_entrega>/', views.editar_entrega, name='editar_entrega'),  # Editar entrega
+    path('consultar-programa/', views.consultar_programa, name='consultar_programas'),  # Consultar programa
     #path('', views.home, name='home'),
     #path('detalle/<int:id>/', views.detalle, name='detalle'),
     #path('crear/', views.crear, name='crear'),

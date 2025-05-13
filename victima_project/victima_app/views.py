@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from victima_app.models import Contratos, Usuario
-from victima_app.models import Beneficiarios
+from victima_app.models import Beneficiarios, BeneficiarioProgramas
 from victima_app.models import Entregas, Programas, Productos
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -9,7 +9,7 @@ from rest_framework import permissions, viewsets
 from .serializers import UsuarioSerializer, ContratosSerializer
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-#from .forms import BeneficiarioForm 
+from django.db import connection #from .forms import BeneficiarioForm 
 #from .forms import BeneficiarioForm
 
 class ContratosViewSet(viewsets.ModelViewSet):
@@ -582,3 +582,21 @@ def crear_producto(request):
         'producto': producto # Pasar los beneficiarios al contexto
     }   
     return render(request, 'victima_app/crear_productos.html')  # Renderizar la plantilla para crear un programa
+
+def consultar_programa(request):
+    documento_identidad = request.GET.get('documento_identidad')  # Obtener el documento de identidad desde el parámetro GET
+    programas = Programas.objects.none()  # Inicializar con un queryset vacío
+
+    if documento_identidad:
+        beneficiarios = Beneficiarios.objects.filter(documento_identidad=documento_identidad)  # Buscar beneficiarios por documento
+        if beneficiarios.exists():
+            beneficiariosProgramas = BeneficiarioProgramas.objects.filter(id_beneficiario__documento_identidad=documento_identidad)
+            beneficiario_ids = beneficiarios.values_list('id_beneficiario', flat=True)  # Obtener los IDs de los beneficiarios
+            beneficiarios_programas_ids = programas.values_list('id_programa', flat=True)  # Obtener los IDs de los programas  
+            programas = Programas.objects.filter(beneficiarioprogramas__id_beneficiario__in=beneficiario_ids)  # Filtrar programas relacionados
+
+    context = {
+        'programas': programas,  # Pasar los programas al contexto
+        'documento_identidad': documento_identidad  # Pasar el documento de identidad al contexto
+    }
+    return render(request, 'aut_app/home.html', context)  # Renderizar la plantilla con el contexto

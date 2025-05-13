@@ -29,13 +29,41 @@
             <h2 class="display-4 fw-bold text-primary">Bienvenidos</h2>
             <p class="lead text-muted">Esta plataforma está dedicada a honrar y apoyar a las víctimas del conflicto armado.</p>
             
-            <form method="GET" action="" class="mt-4">
-                <div class="mb-3">
-                    <label for="documento_identidad" class="form-label fw-semibold">Documento de Identidad</label>
-                    <input type="text" class="form-control w-50 mx-auto shadow-sm" id="documento_identidad" name="documento_identidad" placeholder="Ingrese su documento de identidad" required>
-                </div>
-                <button type="submit" class="btn btn-dark btn-lg rounded-pill shadow">Consultar Programas</button>
+            <form method="GET" action="{% url 'consultar_programas' %}" class="mt-4">
+            <div class="mb-3">
+                <label for="documento_identidad" class="form-label fw-semibold">Documento de Identidad</label>
+                <input type="text" class="form-control w-50 mx-auto shadow-sm" id="documento_identidad" name="documento_identidad" placeholder="Ingrese su documento de identidad" required>
+            </div>
+            <button type="submit" class="btn btn-dark btn-lg rounded-pill shadow">Consultar Programas</button>
             </form>
+
+            {% if programas %}
+            <div class="mt-5">
+                <h3 class="fw-bold text-primary">Programas Disponibles</h3>
+                <table class="table table-bordered table-striped mt-3">
+                <thead>
+                    <tr>
+                    <th>Nombre del Programa</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for programa in programas %}
+                    <tr>
+                        <td>{{ programa.nombre }}</td>
+                        <td>{{ programa.descripcion }}</td>
+                        <td>{{ programa.fecha_inicio }}</td>
+                        <td>{{ programa.fecha_finalizacion }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            {% elif not programas and request.GET.documento_identidad %}
+            <p class="text-danger mt-4">No se encontraron programas para el documento ingresado.</p>
+            {% endif %}
         </section>
 
         <!-- 📢 Sección de Testimonios -->
