@@ -68,10 +68,24 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return render(request, "aut_app/logout.html")
-
-
+    
 def dashboard_view(request):
     if request.user.is_authenticated:
         return render(request, "aut_app/dashboard.html")
     else:
         return HttpResponseRedirect(reverse("login"))
+    
+def equipo_view(request):
+    if request.user.is_authenticated:
+        return render(request, "aut_app/equipo.html")
+    else:
+        return HttpResponseRedirect(reverse("login"))
+
+def contacto_view(request):
+    if request.user.is_authenticated:
+        return render(request, "aut_app/contacto.html")
+    else:
+        return HttpResponseRedirect(reverse("login"))
+    
+    
+

@@ -19,9 +19,13 @@ urlpatterns = [
     path('lista-programas/', views.lista_programas, name='lista_programas'),  # Lista programa
     path('editar-programa/<int:id_programa>/', views.editar_programa, name='editar_programa'),
     path('eliminar-programa/<int:id_programa>/', views.eliminar_programa, name='eliminar_programa'),  # Eliminar programa
+    path('lista-entregas/', views.lista_entregas, name='lista_entregas'),  # Lista entregas
+    path('crear-entregas/', views.crear_entrega, name='crear_entregas'),  # Crear programa
+    path('eliminar-entrega/<int:id_entrega>/', views.eliminar_entrega, name='eliminar_entrega'),
+    path('editar-entrega/<int:id_entrega>/', views.editar_entrega, name='editar_entrega'),  # Editar entrega
     #path('', views.home, name='home'),
     #path('detalle/<int:id>/', views.detalle, name='detalle'),
     #path('crear/', views.crear, name='crear'),
     #path('editar/<int:id>/', views.editar, name='editar'),
     #path('eliminar/<int:id>/', views.eliminar, name='eliminar'),
-]
+] 

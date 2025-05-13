@@ -1,0 +1,41 @@
+{% extends "aut_app/base_generica.html" %}
+
+{% block title %}Equipo{% endblock %}
+    
+{% load static %}
+
+{% block content %}
+<section class="text-center mt-5">
+    <h2 class="fw-bold text-primary">Equipo</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="p-4 shadow-lg border rounded" style="width: 100%;">
+                <p style="text-align: justify;">
+                    "Nuestro equipo está conformado por un grupo multidisciplinario de estudiantes de la Universidad San Mateo, unidos por el propósito de generar un impacto positivo en la vida de quienes han sido afectados por el conflicto armado. Con una profunda sensibilidad social y un compromiso inquebrantable, trabajamos para ofrecer recursos, información y acompañamiento a las víctimas, ayudándolas en su proceso de recuperación y reintegración.
+                    Cada miembro de nuestro equipo aporta su conocimiento y habilidades en diversas áreas, como psicología, derecho, trabajo social y comunicación, con el objetivo de construir un espacio digital accesible, seguro y enriquecedor. A través de esta plataforma, buscamos proporcionar orientación, apoyo emocional y herramientas que empoderen a las personas para reconstruir sus vidas con dignidad y esperanza.
+                    La Universidad San Mateo respalda esta iniciativa como parte de su compromiso con la responsabilidad social y el servicio comunitario, promoviendo el liderazgo estudiantil y el trabajo colaborativo para generar soluciones reales ante desafíos sociales.
+                    Nos motiva la convicción de que el cambio es posible y que, juntos, podemos contribuir a una sociedad más justa y solidaria."
+                </p>
+                <p class="fw-semibold"><strong>- María Rodríguez</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contenedor principal -->
+<div class="team-container d-flex justify-content-center gap-4">
+    <!-- Primer contenedor -->
+    <div class="team-member text-center">
+        <img src="{% static 'aut_app/images/juan_camilo.jpg' %}" class="d-block w-100 rounded shadow-lg img-mediana" alt="Imagen 2">
+        <p class="fw-semibold"><strong>Angela Romo</strong></p>
+        <p>Estudiante - Ingeniería de Sistemas</p>
+    </div>
+
+    <!-- Segundo contenedor -->
+    <div class="team-member text-center">
+        <img src="{% static 'aut_app/images/slide1.jpg' %}" class="d-block w-100 rounded shadow-lg img-mediana" alt="Imagen 3">
+        <p class="fw-semibold"><strong>Juan Pérez</strong></p>
+        <p>Docente - Ingeniería de Sistemas</p>
+    </div>
+</div>
+{% endblock %}

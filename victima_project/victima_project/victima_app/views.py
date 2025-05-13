@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from victima_app.models import Contratos, Usuario
 from victima_app.models import Beneficiarios
-from victima_app.models import Entregas, Programas
+from victima_app.models import Entregas, Programas, Productos
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import Group, User
@@ -284,38 +284,6 @@ def editar_beneficiario(request, id_beneficiario):
     }
     return render(request, 'victima_app/editar_beneficiario.html', context) 
 
-# Crear en django una vista que muestre un listado de entregas
-def entregas_list(request):
-    entregas= Entregas.objects.all()  # Obtener lista de entregas de la base de datos
-    context = {
-        'entregas': entregas  # Pasar los entregas al contexto
-    }
-    return render(request, 'victima_app/lista_entregas.html', context)
-
-#crear una vista en django para crear una entrega
-
-def crear_entregas(request):
-    if request.method == 'POST':
-        cantidad = request.POST.get('cantidad')
-        fecha_entrega = request.POST.get('fecha_entrega')
-        contrato = contrato.objects.all()  # Obtener todas las entregas
-        contrato_ids = [contrato.id for contrato in contrato]  # Extraer los IDs
-        contrato.objects.create(
-            cantidad=cantidad,
-            fecha_entrega=fecha_entrega,
-            id_contrato_id=contrato_ids[0]  # Asignar el primer beneficiario como ejemplo
-        )
-        return HttpResponseRedirect(reverse("login"))
-    return render(request, 'victima_app/crear_entregas.html')  # Renderizar la plantilla para crear un entrega
- 
-# Crear en django una vista que muestre un listado de entregas
-def entregas_list(request):
-    entregas= Entregas.objects.all()  # Obtener lista de entregas de la base de datos
-    context = {
-        'entregas': entregas  # Pasar los entregas al contexto
-    }
-    return render(request, 'victima_app/lista_entregas.html', context)
-
 #crear una vista en django para crear un programa
 def crear_programa(request):
     programa = Programas.objects.all()
@@ -389,3 +357,99 @@ def eliminar_programa(request, id_programa):
     }
     return render(request, 'victima_app/eliminar_programa.html', context)  # Renderizar la plantilla para confirmar la eliminación
 
+
+def crear_entrega(request):
+    entrega = Entregas.objects.all()
+    if request.method == 'POST':
+        id_contrato = request.POST.get('id_contrato')
+        id_producto = request.POST.get('id_producto')
+        cantidad = request.POST.get('cantidad')
+        fecha_entrega = request.POST.get('fecha_entrega')
+        
+        
+        Entregas.objects.create(
+            id_contrato=id_contrato,
+            id_producto=id_producto,
+            cantidad=cantidad,
+            fecha_entrega=fecha_entrega,
+        )
+        return HttpResponseRedirect(reverse('lista_entregas'))
+        context = {
+        'entrega': entrega # Pasar los beneficiarios al contexto
+    }   
+    return render(request, 'victima_app/crear_entregas.html')  # Renderizar la plantilla para crear un programa
+
+# Crear en django una vista que muestre un listado de programas
+def lista_entregas(request):
+    entrega = Entregas.objects.all()  # Obtener lista de programas de la base de datos
+    if request.method == 'POST':
+        id_contrato = request.POST.get('id_contrato')
+        id_producto = request.POST.get('id_producto')
+        cantidad = request.POST.get('cantidad')
+        fecha_entrega = request.POST.get('fecha_entrega')
+        
+        Entregas.objects.create(
+            id_contrato=id_contrato,
+            id_producto=id_producto,
+            cantidad=cantidad,
+            fecha_entrega=fecha_entrega,
+           
+        )
+        return HttpResponseRedirect(reverse("crear-entregas"))  # Redirigir a la lista de beneficiarios después de crear uno
+        context = {
+        'entregas': entrega  # Pasar los beneficiarios al contexto
+    }
+        
+    context = {
+        'entregas': entrega  # Pasar los beneficiarios al contexto
+    }
+    return render(request,'victima_app/lista_entregas.html', context) # Renderizar la plantilla con el contexto
+
+ 
+def editar_entrega(request, id_entrega):
+    entrega = Entregas.objects.get(pk=id_entrega)  # Obtener el programa por ID
+
+    if request.method == 'POST':
+        entrega.nombre = request.POST.get('fecha_inicio')
+        entrega.fecha_inicio = request.POST.get('fecha_fin')
+        entrega.etapa = request.POST.get('etapa')
+        return redirect('lista_entregas')  # Redirigir a la lista de programa
+
+    context = {
+        'entregas': entregas  # Pasar el programa al contexto
+    }
+    return render(request, 'victima_app/editar_entrega.html', context)  # Renderizar la plantilla para editar un contrato
+
+
+def eliminar_entrega(request, id_entrega):
+    entrega = Entregas.objects.get(pk=id_entrega)  # Obtener el contrato por ID
+
+    if request.method == 'POST':
+        entrega.delete()  # Eliminar el contrato de la base de datos
+        return redirect('entrega_list')  # Redirigir a la lista de contratos
+
+    context = {
+        'Entregas': Entregas  # Pasar el contrato al contexto
+    }
+    return render(request, 'victima_app/eliminar_entrega.html', context)  # Renderizar la plantilla para confirmar la eliminación
+
+#crear una vista en django para crear un producto de la base de datos del proyecto victima
+def crear_producto(request):
+    producto = Productos.objects.all()
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        descripcion = request.POST.get('descripcion')
+        cantidad = request.POST.get('cantidad')
+        fecha_registro = request.POST.get('fecha_registro')
+        
+        Productos.objects.create(
+            nombre=nombre,
+            descripcion=descripcion,
+            cantidad=cantidad,
+            fecha_registro=fecha_registro,
+        )
+        return HttpResponseRedirect(reverse('lista_productos'))
+        context = {
+        'producto': producto # Pasar los beneficiarios al contexto
+    }   
+    return render(request, 'victima_app/crear_productos.html')  # Renderizar la plantilla para crear un programa

@@ -70,8 +70,17 @@
         <section class="text-center mt-5">
             <h2 class="fw-bold text-primary">Recursos</h2>
             <p class="lead text-muted">Encuentra documentos y guías sobre programas de apoyo.</p>
-            <a href="#" class="btn btn-success btn-lg rounded-pill shadow">Ver Recursos</a>
+            <a href="#" class="btn btn-success rounded-pill shadow mb-5 px-4 py-2 lead">Ver Recursos</a>
         </section>
+
+        <!-- 💬 Chatbot flotante -->
+        <script src="//code.tidio.co/tu-id-de-chat.js" async></script>
+        <div class="chatbot-float" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <a href="#" class="btn btn-success rounded-circle shadow-lg d-flex align-items-center justify-content-center" 
+               data-bs-toggle="modal" data-bs-target="#chatbotModal" style="width: 60px; height: 60px;">
+                <i class="fas fa-comments fs-4 text-white"></i>
+            </a>
+        </div>  
 
     </div>
 {% endblock %}

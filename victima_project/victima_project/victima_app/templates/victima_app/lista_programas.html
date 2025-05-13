@@ -9,6 +9,7 @@
 <div class="container mt-5">
     <h1 class="fw-bold text-success">Listado de Programas</h1>
     <a class="btn btn-primary mb-3" href="{% url 'crear_programas' %}">Crear nuevo Programa</a>
+    <a class="btn btn-primary mb-3" href="{% url 'dashboard' %}">Tablero de Gestión</a>
 
     {% comment %}
     <h2 class="fw-bold text-secondary">Búsqueda de Beneficiarios</h2>
@@ -74,9 +75,6 @@
                 </tr>
                 {% endfor %}
         </table>
-        <div class="text-center">
-            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
-        </div>
     </div>
 </div>
 {% endblock %}
