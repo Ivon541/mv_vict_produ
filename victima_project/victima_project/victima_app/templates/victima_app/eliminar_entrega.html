@@ -13,14 +13,14 @@
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card shadow-lg p-5 text-center">
-        <h2 class="fw-bold text-danger">Eliminar Contrato</h2>
-        <p class="fs-5 text-muted">¿Estás seguro de que deseas eliminar el contrato <strong>{{ contrato.nombre }}</strong>?</p>
+        <h2 class="fw-bold text-danger">Eliminar Entrega</h2>
+        <p class="fs-5 text-muted">¿Estás seguro de que deseas eliminar Entrega <strong>{{ entrega.nombre }}</strong>?</p>
 
         <form method="post">
             {% csrf_token %}
             <div class="mt-4">
                 <button type="submit" class="btn btn-danger btn-lg">Eliminar</button>
-                <a href="{% url 'contrato_list' %}" class="btn btn-outline-secondary btn-lg ms-3">Cancelar</a>
+                <a href="{% url 'lista_entregas' %}" class="btn btn-outline-secondary btn-lg ms-3">Cancelar</a>
             </div>
         </form>
     </div>

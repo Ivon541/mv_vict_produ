@@ -1,0 +1,51 @@
+{% extends "aut_app/base_generica.html" %}
+
+{% block title %}Inicio{% endblock %}
+    
+{% load static %}
+
+{% block content %}
+<section class="contacto py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold text-primary mb-4">Contáctanos</h2>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="p-4 shadow-lg border rounded bg-white">
+                    <h4 class="fw-bold">Información de Contacto</h4>
+                    <p><strong>Correo:</strong> contacto@ejemplo.com</p>
+                    <p><strong>Teléfono:</strong> +57 123 456 7890</p>
+                    <p><strong>Dirección:</strong> Calle 123, Bogotá, Colombia</p>
+                    <p><strong>Horario de Atención:</strong> Lunes a Viernes, 9:00 AM - 5:00 PM</p>
+                    
+                    <h4 class="fw-bold mt-3">Redes Sociales</h4>
+                    <a href="#" class="btn btn-outline-primary me-2">Facebook</a>
+                    <a href="#" class="btn btn-outline-primary me-2">Twitter</a>
+                    <a href="#" class="btn btn-outline-primary">Instagram</a>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="p-4 shadow-lg border rounded bg-white">
+                    <h4 class="fw-bold">Formulario de Contacto</h4>
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="Tu correo electrónico">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

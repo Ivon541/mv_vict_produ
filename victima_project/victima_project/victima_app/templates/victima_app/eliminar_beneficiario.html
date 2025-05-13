@@ -1,17 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar Beneficiario</title>
-</head>
-<body>
-    <h1>Eliminar Beneficiario</h1>
-    <p>¿Estás seguro de que deseas eliminar al beneficiario <strong>{{ beneficiario.nombre }}</strong>?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Sí, eliminar</button>
-        <a href="{% url 'eliminar_beneficiary' %}">Cancelar</a>
-    </form>
-</body>
-</html>
+{% extends 'aut_app/base_generica.html' %}
+{% if not user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'login' %}";
+    </script>
+{% endif %}
+{% if not user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'login' %}";
+    </script>
+{% endif %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-5 text-center">
+        <h2 class="fw-bold text-danger">Eliminar Beneficiario</h2>
+        <p class="fs-5 text-muted">¿Estás seguro de que deseas eliminar el beneficiario <strong>{{ beneficiario.nombre }}</strong>?</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mt-4">
+                <button type="submit" class="btn btn-danger btn-lg">Eliminar</button>
+                <a href="{% url 'beneficiario_list' %}" class="btn btn-outline-secondary btn-lg ms-3">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

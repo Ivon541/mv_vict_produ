@@ -7,15 +7,15 @@
     <div class="row justify-content-center">
         <div class="col-11">
             <div class="card shadow-lg p-4">
-                <h2 class="fw-bold text-center text-success">Crear Entrega</h2>
+                <h2 class="fw-bold text-center text-success">Crear Programas</h2>
                 
-                <form method="post" action="{% url 'crear_entregas' %}">
+                <form method="post" action="{% url 'crear_programas' %}">
                     {% csrf_token %}
                 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="cantidad" class="form-label">Cantidad:</label>
-                            <input type="cantidad" id="cantidad" name="cantidad" class="form-control" required>      
+                            <label for="nombre" class="form-label">Nombre del programa:</label>
+                            <input type="nombre" id="nombre" name="nombre" class="form-control" required>      
                         </div>
                    
                         <div class="col-md-6 mb-3">
@@ -49,7 +49,7 @@
             
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-lg">Guardar Programa</button>
-                        <a href="{% url 'lista_entregas' %}" class="btn btn-outline-secondary btn-lg mt-2">Volver</a>
+                        <a href="{% url 'lista_programas' %}" class="btn btn-outline-secondary btn-lg mt-2">Volver</a>
                     </div>
                 </form>
             </div>

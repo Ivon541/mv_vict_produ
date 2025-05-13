@@ -1,26 +1,25 @@
-{% extends "aut_app/base_generica.html" %}
+{% extends 'aut_app/base_generica.html' %}
 
-{% block title %}Registro{% endblock %}
 
 {% block content %}
-<div class="container-fluid mt-5">
+<div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-11">
+        <div class="col-md-8">
             <div class="card shadow-lg p-4">
-                <h2 class="fw-bold text-center text-success">Crear Beneficiario</h2>
-                
-                <form method="post" action="{% url 'crear_beneficiario' %}">
+                <h2 class="fw-bold text-center text-success">Editar </h2>
+
+                <form method="post">
                     {% csrf_token %}
-                
+                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="nombre" class="form-label">Nombres:</label>
-                            <input type="nombre" id="nombre" name="nombre" class="form-control" required>      
+                            <input type="nombre" id="nombre" name="nombre" class="form-control" required> 
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="apellido" class="form-label">Apellidos:</label>
-                            <input type="apellido" id="apellido" name="apellido" class="form-control" required>         
+                            <input type="apellido" id="apellido" name="apellido" class="form-control" required> 
                         </div>
                     </div>
 
@@ -33,7 +32,7 @@
                                 <option value="rc">Registro civil</option>
                             </select>
                         </div>
-                             
+                        
                         <div class="col-md-6 mb-3">
                             <label for="documento_identidad" class="form-label">Documento Identidad:</label>
                             <input type="documento_identidad" id="documento_identidad" name="documento_identidad" class="form-control" required> 
@@ -45,7 +44,7 @@
                             <label for="direccion" class="form-label">Dirección:</label>
                             <input type="direccion" id="direccion" name="direccion" class="form-control" required> 
                         </div>
-                    
+                        
                         <div class="col-md-6 mb-3">
                             <div class="mb-3">
                                 <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
@@ -53,27 +52,22 @@
                             </div>    
                         </div>
                     </div>
-                
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="telefono" class="form-label">Telefono:</label>
-                            <input type="telefono" id="telefono" name="telefono" class="form-control" required>
+                            <input type="telefono" id="telefono" name="telefono" class="form-control" required> 
                         </div>
-
+                        
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">Email:</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required> 
                         </div>
-                    </div> 
-                
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="fecha_registro" class="form-label">Fecha de Registro:</label>
-                            <input type="date" id="fecha_registro" name="fecha_registro" class="form-control" required>
-                        </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg">Guardar Beneficiario</button>
-                        <a href="{% url 'lista_beneficiarios' %}" class="btn btn-outline-secondary btn-lg mt-2">Volver</a>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Guardar Cambios</button>
+                        <a href="{% url 'crear_beneficiario' %}" class="btn btn-outline-secondary btn-lg ms-2">Cancelar</a>
                     </div>
                 </form>
             </div>
@@ -81,4 +75,3 @@
     </div>
 </div>
 {% endblock %}
-

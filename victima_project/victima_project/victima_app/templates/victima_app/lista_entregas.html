@@ -7,8 +7,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="fw-bold text-success">Listado de Contratos</h1>
-    <a class="btn btn-primary mb-3" href="{% url 'crear_contrato' %}">Crear nuevo contrato</a>
+    <h1 class="fw-bold text-success">Listado de Entregas</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'crear_entregas' %}">Crear nueva Entrega</a>
     <a class="btn btn-primary mb-3" href="{% url 'dashboard' %}">Tablero de Gestión</a>
 
     {% comment %}
@@ -49,29 +49,29 @@
     {% endif %}
     {% endcomment %}
 
-    <h2 class="fw-bold text-secondary mt-4">Contratos</h2>
+    <h2 class="fw-bold text-secondary mt-4">Entregas</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-success">
                 <tr>
                     <th>Beneficiario</th>
-                    <th>Etapa</th>
+                    <th>Cantidad</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for contrato in contratos %}
+                {% for entrega in entregas %}
                 <tr>
-                    <td>{{ contrato.id_beneficiario_id }}</td>
-                    <td>{{ contrato.etapa }}</td>
+                    <td>{{ entrega.id_entrega_id }}</td>
+                    <td>{{ entrega.etapa }}</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="{% url 'editar_contrato' contrato.id_contrato %}">Editar</a>
-                        <a class="btn btn-danger btn-sm" href="{% url 'eliminar_contrato' contrato.id_contrato %}">Eliminar</a>
+                        <a class="btn btn-warning btn-sm" href="{% url 'editar_entrega' entrega.id_entrega %}">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'eliminar_entrega' entrega.id_entrega %}">Eliminar</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="3" class="text-center text-muted">No hay contratos disponibles.</td>
+                    <td colspan="3" class="text-center text-muted">No hay Entregas disponibles.</td>
                 </tr>
                 {% endfor %}
             </tbody>

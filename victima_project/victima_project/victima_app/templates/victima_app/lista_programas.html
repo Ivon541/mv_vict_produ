@@ -7,8 +7,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="fw-bold text-success">Listado de Contratos</h1>
-    <a class="btn btn-primary mb-3" href="{% url 'crear_contrato' %}">Crear nuevo contrato</a>
+    <h1 class="fw-bold text-success">Listado de Programas</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'crear_programas' %}">Crear nuevo Programa</a>
     <a class="btn btn-primary mb-3" href="{% url 'dashboard' %}">Tablero de Gestión</a>
 
     {% comment %}
@@ -49,32 +49,31 @@
     {% endif %}
     {% endcomment %}
 
-    <h2 class="fw-bold text-secondary mt-4">Contratos</h2>
+    <h2 class="fw-bold text-secondary mt-4">Programas</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-success">
                 <tr>
-                    <th>Beneficiario</th>
-                    <th>Etapa</th>
+                    <th>Programa</th>
+                    <th>Tipo de Programa</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for contrato in contratos %}
+                {% for programa in programas %}
                 <tr>
-                    <td>{{ contrato.id_beneficiario_id }}</td>
-                    <td>{{ contrato.etapa }}</td>
+                    <td>{{ programa.nombre }}</td>
+                    <td>{{ programa.tipo_programa }}</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="{% url 'editar_contrato' contrato.id_contrato %}">Editar</a>
-                        <a class="btn btn-danger btn-sm" href="{% url 'eliminar_contrato' contrato.id_contrato %}">Eliminar</a>
+                        <a class="btn btn-warning btn-sm" href="{% url 'editar_programa' programa.id_programa %}">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'eliminar_programa' programa.id_programa %}">Eliminar</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="3" class="text-center text-muted">No hay contratos disponibles.</td>
+                    <td colspan="3" class="text-center text-muted">No hay Programas disponibles.</td>
                 </tr>
                 {% endfor %}
-            </tbody>
         </table>
     </div>
 </div>

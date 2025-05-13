@@ -5,7 +5,7 @@
 {% load static %}
 
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -16,10 +16,10 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{% static 'aut_app/images/slide1.jpg' %}" class="d-block w-100 full-height rounded shadow-lg" alt="Imagen 1">
+                    <img src="{% static 'aut_app/images/imagen2.jpg' %}" class="d-block w-100 full-height rounded shadow-lg" alt="Imagen 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="{% static 'aut_app/images/slide2.jpeg' %}" class="d-block w-100 full-height rounded shadow-lg" alt="Imagen 2">
+                    <img src="{% static 'aut_app/images/imagen1.jpg' %}" class="d-block w-100 full-height rounded shadow-lg" alt="Imagen 2">
                 </div>
             </div>
         </div>
@@ -70,8 +70,17 @@
         <section class="text-center mt-5">
             <h2 class="fw-bold text-primary">Recursos</h2>
             <p class="lead text-muted">Encuentra documentos y guías sobre programas de apoyo.</p>
-            <a href="#" class="btn btn-success btn-lg rounded-pill shadow">Ver Recursos</a>
+            <a href="#" class="btn btn-success rounded-pill shadow mb-5 px-4 py-2 lead">Ver Recursos</a>
         </section>
+
+        <!-- 💬 Chatbot flotante -->
+        <script src="//code.tidio.co/tu-id-de-chat.js" async></script>
+        <div class="chatbot-float" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <a href="#" class="btn btn-success rounded-circle shadow-lg d-flex align-items-center justify-content-center" 
+               data-bs-toggle="modal" data-bs-target="#chatbotModal" style="width: 60px; height: 60px;">
+                <i class="fas fa-comments fs-4 text-white"></i>
+            </a>
+        </div>  
 
     </div>
 {% endblock %}

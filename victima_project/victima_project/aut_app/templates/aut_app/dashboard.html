@@ -38,7 +38,7 @@
          <div class="col-md-4">
             <div class="card hover-effect p-3">
                 <h5 class="card-title fw-bold">Programas</h5>
-                <a class="btn btn-success mt-2" href="{% url 'beneficiario_list' %}">Acceder</a>
+                <a class="btn btn-success mt-2" href="{% url 'lista_programas' %}">Acceder</a>
             </div>
         </div>
 
@@ -46,11 +46,36 @@
          <div class="col-md-4">
             <div class="card hover-effect p-3">
                 <h5 class="card-title fw-bold">Beneficiarios</h5>
-                <a class="btn btn-success mt-2" href="{% url 'beneficiario_list' %}">Acceder</a>
+                <a class="btn btn-success mt-2" href="{% url 'lista_beneficiarios' %}">Acceder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+
+         <!-- Enlace específico para ingresar Victimas del Conflicto Armado -->
+        <div class="col-md-4">
+            <div class="card hover-effect p-3">
+                <h5 class="card-title fw-bold">Entregas</h5>
+                <a class="btn btn-success mt-2" href="{% url 'lista_entregas' %}">Acceder</a>
             </div>
         </div>
 
-        
+        <!-- Enlace específico para ingresar Victimas del Conflicto Armado -->
+        <div class="col-md-4">
+            <div class="card hover-effect p-3">
+                <h5 class="card-title fw-bold">Productos</h5>
+                <a class="btn btn-success mt-2" href="{% url 'lista_beneficiarios' %}">Acceder</a>
+            </div>
+        </div>
+
+        <!-- Enlace específico para ingresar Victimas del Conflicto Armado -->
+        <div class="col-md-4">
+            <div class="card hover-effect p-3">
+                <h5 class="card-title fw-bold">Beneficiario_Programa</h5>
+                <a class="btn btn-success mt-2" href="{% url 'lista_beneficiarios' %}">Acceder</a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
