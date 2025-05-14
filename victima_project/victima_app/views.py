@@ -62,13 +62,16 @@ def crear_contrato(request):
         etapa = request.POST.get('etapa')
         beneficiarios = Beneficiarios.objects.all()  # Obtener todos los beneficiarios
         beneficiarios_ids = [beneficiario.id_beneficiario for beneficiario in beneficiarios]  # Extraer los IDs
-        Contratos.objects.create(
+        contratos = Contratos.objects.create(
             fecha_inicio=fecha_inicio,
             fecha_fin=fecha_fin,
             etapa=etapa,
             id_beneficiario_id=beneficiarios_ids[0]  # Asignar el primer beneficiario como ejemplo
         )
-        return HttpResponseRedirect(reverse("contrato_list"))
+        context = {
+            'contratos': contratos  # Pasar los contratos al contexto
+        }
+        return HttpResponseRedirect(reverse("contrato_list"), context)  # Redirigir a la lista de contratos después de crear uno
     context = {
         'beneficiarios': beneficiarios  # Pasar los beneficiarios al contexto
     }
@@ -76,6 +79,8 @@ def crear_contrato(request):
         return render(request, 'victima_app/crear_contratos.html', context)  # Renderizar la plantilla para crear un contrato
     else:
         return HttpResponseRedirect(reverse("login"))
+
+
     
 
 
@@ -192,7 +197,7 @@ def crear_beneficiario(request):
         email = request.POST.get('email')
         fecha_registro = request.POST.get('fecha_registro')
         
-        Beneficiarios.objects.create(
+        beneficiario = Beneficiarios.objects.create(
             nombre=nombre,
             apellido=apellido,
             tipo_documento=tipo_documento,
@@ -203,7 +208,10 @@ def crear_beneficiario(request):
             email=email,
             fecha_registro=fecha_registro,
         )
-        return HttpResponseRedirect(reverse("lista_beneficiarios"))  # Redirigir a la lista de beneficiarios después de crear uno
+        context = {
+            'beneficiarios': beneficiario  # Pasar los beneficiarios al contexto
+        }
+        return HttpResponseRedirect(reverse("lista_beneficiarios"), context)  # Redirigir a la lista de beneficiarios después de crear uno
         context = {
         'beneficiarios': beneficiarios  # Pasar los beneficiarios al contexto
     }

@@ -54,16 +54,20 @@
         <table class="table table-bordered table-hover">
             <thead class="table-success">
                 <tr>
-                    <th>Beneficiario</th>
-                    <th>Etapa</th>
+                    <th>Tipo Contrato</th>
+                    <th>Monto</th>
+                    <th>Fecha Registro</th>
+                    <th>Objeto</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for contrato in contratos %}
                 <tr>
-                    <td>{{ contrato.id_beneficiario_id }}</td>
-                    <td>{{ contrato.etapa }}</td>
+                    <td>{{ contrato.tipo_contrato }}</td>
+                    <td>{{ contrato.monto }}</td>
+                    <td>{{ contrato.fecha_registro }}</td>
+                    <td>{{ contrato.objecto }}</td>
                     <td>
                         <a class="btn btn-warning btn-sm" href="{% url 'editar_contrato' contrato.id_contrato %}">Editar</a>
                         <a class="btn btn-danger btn-sm" href="{% url 'eliminar_contrato' contrato.id_contrato %}">Eliminar</a>

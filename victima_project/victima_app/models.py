@@ -14,6 +14,10 @@ class Usuario(models.Model):
     rol = models.CharField(max_length=20, choices=ROL)
     
 class Beneficiarios(models.Model):
+    ESTADO_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('procesado', 'Procesado'),
+    ]
     id_beneficiario = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100,default='nn')
@@ -23,24 +27,31 @@ class Beneficiarios(models.Model):
     direccion = models.CharField(max_length=255,default='nn')
     telefono = models.CharField(max_length=15,default='nn')
     email = models.EmailField(default='nn')
-    fecha_registro = models.DateField(default='2000-01-01') 
+    fecha_registro = models.DateField(auto_now_add=True) 
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='pendiente')
+
+    class Meta:
+        ordering = ['fecha_registro']  # El ultimo registro ingresado es el primero en la lista (FIFO - COLA)
     
     
 class Contratos(models.Model):
-    ETAPA = {
-        'pre': 'Preejecucion',
-        'eje': 'Ejecucion',
-        'liq': 'Liquidacion',
-    }
+    ETAPA_CHOICES = [
+        ('pre', 'Preejecucion'),
+        ('eje', 'Ejecucion'),
+        ('liq', 'Liquidacion'),
+    ]
     id_contrato = models.AutoField(primary_key=True)
     id_beneficiario = models.ForeignKey(Beneficiarios, on_delete=models.CASCADE)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    etapa = models.CharField(max_length=20, choices=ETAPA)
+    etapa = models.CharField(max_length=20, choices=ETAPA_CHOICES)
     monto = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    fecha_registro = models.DateField(default='2000-01-01')
+    fecha_registro = models.DateField(auto_now_add=True)
     tipo_contrato = models.CharField(max_length=50,default='nn')
     objecto = models.TextField(default='nn')
+
+    class Meta:
+        ordering = ['-fecha_registro']  # Ultimo contrato agregado es el ultimo en la lista (LIFO -PILA)
     
     
 class Productos(models.Model):

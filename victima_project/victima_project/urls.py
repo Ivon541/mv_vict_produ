@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('aut_app.urls')),
     path('victima/', include('victima_app.urls')),
+    path('turnos/', include('gestion.urls')),
     path('api-aut/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-victima/', include(router.urls)),
 ]
