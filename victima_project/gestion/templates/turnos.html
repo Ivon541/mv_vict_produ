@@ -1,24 +1,57 @@
-<head>
-    <style>
-    /* Estilo para el encabezado */
-    h2 {
-        font-size: 24px;
-        color: #222;
-        margin-bottom: 20px;
-        text-align: center;
+{% extends "aut_app/base_generica.html" %}
+{% load static%}
+
+
+{% if not user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'login' %}";
+    </script>
+{% endif %}
+
+
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% block extra_css %}
+<style>
+    /* Contenedor del scroll centrado */
+    .scroll-box {
+        width: 50%;
+        max-height: 300px;
+        overflow-y: auto;
+        border-radius: 12px;
+        padding: 15px;
+        background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        margin: 0 auto; /* Centrar horizontalmente */
+        text-align: center; /* Centrar contenido */
     }
 
-    /* Lista de turnos */
-    ul {
-        list-style-type: none;
+    /* Personalizar la barra de desplazamiento */
+    .scroll-box::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .scroll-box::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 10px;
+    }
+
+    .scroll-box::-webkit-scrollbar-thumb {
+        background: #28a745;
+        border-radius: 10px;
+    }
+
+    /* Estilos de la lista */
+    .turnos-lista {
+        list-style: none;
         padding: 0;
         margin: 0;
-        font-size: 16px;
-        color: #333;
     }
 
-    ul li {
-        background-color: #f8f9fa;
+    .turnos-lista li {
+        background: #ffffff;
         border: 1px solid #ddd;
         border-radius: 8px;
         padding: 12px;
@@ -29,37 +62,50 @@
         transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    ul li:hover {
+    .turnos-lista li:hover {
         transform: translateY(-5px);
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /* Enlaces */
-    a {
-        color: #28a745;
-        text-decoration: none;
-        font-size: 16px;
-        display: inline-block;
-        margin-top: 10px;
-        transition: color 0.3s;
+    /* Estilos de botones */
+    .acciones {
+        text-align: center;
+        margin-top: 20px;
     }
 
-    a:hover {
-        color: #218838;
-        text-decoration: underline;
+    .boton {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #28a745;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: background 0.3s;
+    }
+
+    .boton:hover {
+        background: #218838;
     }
 </style>
-</head>
+{% endblock %}
 
 <h2>Turnos</h2>
-<ul>
-  {% for turno in turnos %}
-    <li>
-        <span>{{ turno.usuario.username }} - {{ turno.estado }} - {{ turno.hora_ingreso | date:"Y-m-d H:i:s" }}</span>
-    </li>
-  {% endfor %}
-</ul>
+<div class="scroll-box">
+    <ul class="turnos-lista">
+      {% for turno in turnos %}
+        <li>
+            <span>{{ turno.usuario.username }} - {{ turno.estado }} - {{ turno.hora_ingreso | date:"Y-m-d H:i:s" }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+</div>
 
-<a href="{% url 'agregar_turno' %}">Solicitar turno</a><br>
-<a href="{% url 'atender_turno' %}">Atender siguiente</a><br>
-<a href="{% url 'ver_historial' %}">Ver historial</a>
+<div class="acciones">
+    <a href="{% url 'agregar_turno' %}" class="boton">Solicitar turno</a>
+    <a href="{% url 'atender_turno' %}" class="boton">Atender siguiente</a>
+    <a href="{% url 'ver_historial' %}" class="boton">Ver historial</a>
+</div>
+
+{% endblock %}
+
