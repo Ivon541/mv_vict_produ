@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Programa</title>
+</head>
+<body>
+    <h1>Consulta de Beneficiario</h1>
+    <form method="GET" action="">
+        <label for="documento_identidad">Documento de Identidad:</label>
+        <input type="text" id="documento_identidad" name="documento_identidad" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if beneficiario %}
+        <h2>Resultado:</h2>
+        <p>ID Beneficiario: {{ beneficiario.id_beneficiario }}</p>
+    {% elif documento_identidad %}
+        <p>No se encontró ningún beneficiario con el documento de identidad proporcionado.</p>
+    {% endif %}
+</body>
+</html>

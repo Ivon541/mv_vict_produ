@@ -600,3 +600,14 @@ def consultar_programa(request):
         'documento_identidad': documento_identidad  # Pasar el documento de identidad al contexto
     }
     return render(request, 'aut_app/home.html', context)  # Renderizar la plantilla con el contexto
+
+def asignar_programa(request):
+    beneficiarios = Beneficiarios.objects.all()  # Obtener todos los beneficiarios
+    if request.method == 'POST':
+        id_beneficiario = request.POST.get('id_beneficiario')  # Obtener el ID del beneficiario seleccionado
+        return HttpResponseRedirect(reverse('detalle_beneficiario', args=[id_beneficiario]))  # Redirigir al detalle del beneficiario
+
+    context = {
+        'beneficiarios': beneficiarios  # Pasar los beneficiarios al contexto
+    }
+    return render(request, 'victima_app/asignar_programa.html', context)  # Renderizar la plantilla con el contexto
