@@ -589,11 +589,11 @@ def consultar_programa(request):
 
     if documento_identidad:
         beneficiarios = Beneficiarios.objects.filter(documento_identidad=documento_identidad)  # Buscar beneficiarios por documento
-        if beneficiarios.exists():
-            beneficiariosProgramas = BeneficiarioProgramas.objects.filter(id_beneficiario__documento_identidad=documento_identidad)
-            beneficiario_ids = beneficiarios.values_list('id_beneficiario', flat=True)  # Obtener los IDs de los beneficiarios
-            beneficiarios_programas_ids = programas.values_list('id_programa', flat=True)  # Obtener los IDs de los programas  
-            programas = Programas.objects.filter(beneficiarioprogramas__id_beneficiario__in=beneficiario_ids)  # Filtrar programas relacionados
+        
+        if beneficiarios.exists():            
+            beneficiario_ids = beneficiarios.values_list('id_beneficiario', flat=True)  # Obtener los IDs de los beneficiarios            
+            beneficiario_programas_ids = BeneficiarioProgramas.objects.filter(id_beneficiario__in=beneficiario_ids).values_list('id_programa', flat=True)  # Obtener los IDs de los programas relacionados
+            programas = Programas.objects.filter(id_programa__in=beneficiario_programas_ids)  # Filtrar programas relacionados
 
     context = {
         'programas': programas,  # Pasar los programas al contexto
