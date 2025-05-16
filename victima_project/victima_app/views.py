@@ -604,8 +604,10 @@ def consultar_programa(request):
             programas = Programas.objects.filter(id_programa__in=beneficiario_programas_ids)  # Filtrar programas relacionados
 
     
-    ciudadanos = Beneficiarios.objects.get(documento_identidad = documento_identidad)  # Obtener todos los beneficiarios
-    
+    if Beneficiarios.objects.filter(documento_identidad=documento_identidad).exists():  # Obtener todos los beneficiarios
+        ciudadanos = Beneficiarios.objects.get(documento_identidad=documento_identidad)
+    else:  # Obtener todos los beneficiarios:
+        ciudadanos = ""
 
     context = {
         'programas': programas,  # Pasar los programas al contexto
