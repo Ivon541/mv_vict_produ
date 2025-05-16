@@ -14,6 +14,12 @@ footer {
     padding: 20px 0;
 }
 
+caption{
+    font-size: 20px;
+    color: #28a745; /* Color verde para que coincida con el logo */
+    text-align: center;
+}
+
 .container-fluid {
     width: 50%;
 }

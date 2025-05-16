@@ -603,9 +603,14 @@ def consultar_programa(request):
             beneficiario_programas_ids = BeneficiarioProgramas.objects.filter(id_beneficiario__in=beneficiario_ids).values_list('id_programa', flat=True)  # Obtener los IDs de los programas relacionados
             programas = Programas.objects.filter(id_programa__in=beneficiario_programas_ids)  # Filtrar programas relacionados
 
+    
+    ciudadanos = Beneficiarios.objects.get(documento_identidad = documento_identidad)  # Obtener todos los beneficiarios
+    
+
     context = {
         'programas': programas,  # Pasar los programas al contexto
-        'documento_identidad': documento_identidad  # Pasar el documento de identidad al contexto
+        'documento_identidad': documento_identidad, # Pasar el documento de identidad al contexto
+        'ciudadanos': ciudadanos,  # Pasar los beneficiarios al contexto
     }
     return render(request, 'aut_app/home.html', context)  # Renderizar la plantilla con el contexto
 
