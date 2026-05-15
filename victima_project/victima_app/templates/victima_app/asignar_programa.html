@@ -1,23 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar Programa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Consulta de Beneficiario</h1>
-    <form method="GET" action="">
-        <label for="documento_identidad">Documento de Identidad:</label>
-        <input type="text" id="documento_identidad" name="documento_identidad" required>
-        <button type="submit">Buscar</button>
+<body class="bg-light">
+<div class="container mt-5" style="max-width:700px;">
+
+    <h2 class="fw-bold text-primary mb-4">📋 Asignar Programa a Beneficiario</h2>
+
+    <!-- 🔍 Formulario de búsqueda -->
+    <form method="GET" action="" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="documento_identidad" class="form-control"
+                   placeholder="Ingrese documento de identidad"
+                   value="{{ documento_identidad }}" required>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
     </form>
 
     {% if beneficiario %}
-        <h2>Resultado:</h2>
-        <p>ID Beneficiario: {{ beneficiario.id_beneficiario }}</p>
-    {% elif documento_identidad %}
-        <p>No se encontró ningún beneficiario con el documento de identidad proporcionado.</p>
+    <!-- ✅ Datos del beneficiario encontrado -->
+    <div class="card shadow-sm mb-4" style="border-left: 5px solid #198754;">
+        <div class="card-body">
+            <h5 class="text-success fw-bold">👤 {{ beneficiario.nombre }} {{ beneficiario.apellido }}</h5>
+            <p class="mb-1"><strong>Cédula:</strong> {{ beneficiario.documento_identidad }}</p>
+            <p class="mb-0"><strong>Estado:</strong>
+                <span class="badge bg-success">{{ beneficiario.estado|capfirst }}</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- 📌 Programas ya asignados -->
+    <h5 class="fw-bold">Programas asignados actualmente:</h5>
+    {% if programas_asignados %}
+        <ul class="list-group mb-4">
+            {% for programa in programas_asignados %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ programa.nombre }}
+                <span class="badge bg-success rounded-pill">{{ programa.tipo_programa }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted mb-4">Este beneficiario no tiene programas asignados aún.</p>
     {% endif %}
+
+    <!-- ➕ Formulario para asignar nuevo programa -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="fw-bold text-primary">➕ Asignar nuevo programa</h5>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <!-- Campo oculto con el ID del beneficiario -->
+                <input type="hidden" name="id_beneficiario" value="{{ beneficiario.id_beneficiario }}">
+                <input type="hidden" name="documento_identidad" value="{{ beneficiario.documento_identidad }}">
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Seleccionar Programa</label>
+                    <select name="id_programa" class="form-select">
+                        {% for programa in todos_los_programas %}
+                            <option value="{{ programa.id_programa }}"
+                                {% if programa.id_programa in ids_asignados %}disabled{% endif %}>
+                                {{ programa.nombre }}
+                                {% if programa.id_programa in ids_asignados %}✔ (ya asignado){% endif %}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success rounded-pill px-4">
+                    ✅ Asignar Programa
+                </button>
+            </form>
+        </div>
+    </div>
+
+    {% if mensaje %}
+        <div class="alert alert-success mt-3">{{ mensaje }}</div>
+    {% endif %}
+
+    {% elif documento_identidad %}
+        <div class="alert alert-danger">
+            ❌ No se encontró ningún beneficiario con el documento <strong>{{ documento_identidad }}</strong>.
+        </div>
+    {% endif %}
+
+</div>
 </body>
 </html>

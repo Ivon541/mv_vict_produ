@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import freshservice_proxy
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
@@ -9,4 +10,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('equipo/', views.equipo_view, name='equipo'),
     path('contacto/', views.contacto_view, name='contacto'),
+    path("ticket/", views.enviar_ticket, name="enviar_ticket"),
+    path("mesa-ayuda/", freshservice_proxy, name="mesa_ayuda"),
+    path('chatbot/', views.chatbot_ajax, name='chatbot_ajax'),
 ]

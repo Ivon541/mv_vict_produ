@@ -1,0 +1,30 @@
+{% extends "aut_app/base_generica.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Gestión de Tickets</h2>
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Asunto</th>
+                <th>Prioridad</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in tickets %}
+            <tr>
+                <td>{{ t.id }}</td>
+                <td>{{ t.nombre }}</td>
+                <td>{{ t.asunto }}</td>
+                <td>{{ t.prioridad }}</td>
+                <td>{{ t.estado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

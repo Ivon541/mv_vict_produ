@@ -1,41 +1,251 @@
+<!-- CONTACTO Y SOPORTE TECNICO - ESTILO INSTITUCIONAL -->
 {% extends "aut_app/base_generica.html" %}
-
-{% block title %}Equipo{% endblock %}
-    
 {% load static %}
 
 {% block content %}
-<section class="text-center mt-5">
-    <h2 class="fw-bold text-primary">Equipo</h2>
-    <div class="row">
-        <div class="col-12">
-            <div class="p-4 shadow-lg border rounded" style="width: 100%;">
-                <p style="text-align: justify;">
-                    "Nuestro equipo está conformado por un grupo multidisciplinario de estudiantes de la Universidad San Mateo, unidos por el propósito de generar un impacto positivo en la vida de quienes han sido afectados por el conflicto armado. Con una profunda sensibilidad social y un compromiso inquebrantable, trabajamos para ofrecer recursos, información y acompañamiento a las víctimas, ayudándolas en su proceso de recuperación y reintegración.
-                    Cada miembro de nuestro equipo aporta su conocimiento y habilidades en diversas áreas, como psicología, derecho, trabajo social y comunicación, con el objetivo de construir un espacio digital accesible, seguro y enriquecedor. A través de esta plataforma, buscamos proporcionar orientación, apoyo emocional y herramientas que empoderen a las personas para reconstruir sus vidas con dignidad y esperanza.
-                    La Universidad San Mateo respalda esta iniciativa como parte de su compromiso con la responsabilidad social y el servicio comunitario, promoviendo el liderazgo estudiantil y el trabajo colaborativo para generar soluciones reales ante desafíos sociales.
-                    Nos motiva la convicción de que el cambio es posible y que, juntos, podemos contribuir a una sociedad más justa y solidaria."
-                </p>
-                <p class="fw-semibold"><strong>- María Rodríguez</strong></p>
+
+<style>
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #198754;
+    }
+    .divider {
+        width: 80px;
+        height: 4px;
+        background: #198754;
+        margin: 10px auto 30px auto;
+        border-radius: 5px;
+    }
+    .faq-item {
+        border-left: 4px solid #198754;
+        padding-left: 12px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div id="ticket" class="text-center mb-4">
+        <h2 class="section-title">Soporte Técnico</h2>
+        <div class="divider"></div>
+        <p class="text-muted">Utiliza este formulario si deseas reportar una falla o solicitar asistencia.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <form id="formFreshdesk" class="shadow p-4 bg-white rounded border">
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Nombre completo</label>
+                    <input type="text" id="fd_nombre" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Documento</label>
+                    <input type="text" id="fd_documento" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Correo electrónico</label>
+                    <input type="email" id="fd_correo" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Asunto</label>
+                    <input type="text" id="fd_asunto" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Prioridad</label>
+                    <select id="fd_prioridad" class="form-select">
+                        <option value="1">Baja</option>
+                        <option value="2">Media</option>
+                        <option value="3">Alta</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Descripción</label>
+                    <textarea id="fd_descripcion" class="form-control" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 py-2 fw-bold">
+                    <i class="bi bi-send"></i> Enviar Ticket
+                </button>
+
+                <p id="fd_mensaje" class="mt-3 fw-bold"></p>
+            </form>
+
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+
+    <!-- FAQ -->
+    <h4 class="fw-bold text-success mt-5">Preguntas Frecuentes (FAQ)</h4>
+
+    <div class="faq-item">
+        <h6 class="fw-bold">¿Cómo consultar si soy beneficiario?</h6>
+        <p class="text-muted">Selecciona "Consultar Beneficiario" en el menú e ingresa tu documento.</p>
+    </div>
+
+    <div class="faq-item">
+        <h6 class="fw-bold">¿Por qué mi consulta no muestra resultados?</h6>
+        <p class="text-muted">Verifica que tus datos estén actualizados en los sistemas oficiales.</p>
+    </div>
+
+    <div class="faq-item">
+        <h6 class="fw-bold">¿En cuánto tiempo responden un ticket?</h6>
+        <p class="text-muted">El tiempo promedio es entre 24 y 48 horas hábiles.</p>
+    </div>
+
+    <hr class="my-5">
+
+
+    <!-- ========================= -->
+    <!-- SECCIÓN DE ASISTENCIA A VÍCTIMAS -->
+    <!-- ========================= -->
+    <div class="text-center mb-4">
+        <h2 class="section-title">Asistencia a Víctimas</h2>
+        <div class="divider"></div>
+        <p class="text-muted fs-5">Orientación para acceder a programas del Estado.</p>
+    </div>
+
+    <h4 class="fw-bold text-success">¿Quién te atiende?</h4>
+    <p class="text-muted">Profesionales en asistencia social y soporte a trámites de víctimas.</p>
+
+    <h4 class="fw-bold text-success mt-4">Tipos de ayudas disponibles</h4>
+    <ul class="text-muted">
+        <li>Ayuda humanitaria</li>
+        <li>Subsidios de vivienda</li>
+        <li>Apoyo alimentario</li>
+        <li>Indemnización administrativa</li>
+        <li>Programas educativos</li>
+    </ul>
+
+    <h4 class="fw-bold text-success mt-4">Enlaces oficiales</h4>
+    <ul>
+        <li><a class="text-success fw-bold" href="https://www.unidadvictimas.gov.co" target="_blank">Unidad para las Víctimas</a></li>
+        <li><a class="text-success fw-bold" href="https://www.sisben.gov.co" target="_blank">Consulta SISBÉN</a></li>
+    </ul>
+
+    <hr class="my-5">
+
+
+    <!-- ========================= -->
+    <!-- CONTACTO Y PQRS -->
+    <!-- ========================= -->
+    <div class="text-center mb-4">
+        <h2 class="section-title">Contacto y PQRS</h2>
+        <div class="divider"></div>
+        <p class="text-muted fs-5">Comunícate a través de los siguientes canales.</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- LÍNEAS DE ATENCIÓN -->
+        <div class="col-md-6">
+            <div class="p-4 bg-white border rounded shadow-sm h-100">
+                <h4 class="fw-bold text-success">Líneas de Atención</h4>
+                <p><i class="bi bi-telephone-inbound-fill text-success"></i> Línea gratuita: <strong>01 8000 123 456</strong></p>
+                <p><i class="bi bi-whatsapp text-success"></i> WhatsApp: <strong>+57 320 555 9988</strong></p>
+                <p><i class="bi bi-envelope-at text-success"></i> Correo de soporte: soporte@victimas.gov.co</p>
+                <p><i class="bi bi-headset text-success"></i> Chat en vivo: 8am - 5pm</p>
+            </div>
+        </div>
+
+        <!-- FORMULARIO PQRS -->
+        <div class="col-md-6">
+            <div class="p-4 bg-white border rounded shadow-sm h-100">
+                <h4 class="fw-bold text-success">Formulario PQRS</h4>
+
+                <form>
+                    <div class="mb-3">
+                        <label class="fw-bold">Tipo de solicitud</label>
+                        <select class="form-select">
+                            <option>Petición</option>
+                            <option>Queja</option>
+                            <option>Reclamo</option>
+                            <option>Sugerencia</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold">Descripción</label>
+                        <textarea class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <button class="btn btn-success w-100 fw-bold">Enviar PQRS</button>
+                </form>
             </div>
         </div>
     </div>
-</section>
 
-<!-- Contenedor principal -->
-<div class="team-container d-flex justify-content-center gap-4">
-    <!-- Primer contenedor -->
-    <div class="team-member text-center">
-        <img src="{% static 'aut_app/images/juan_camilo.jpg' %}" class="d-block w-100 rounded shadow-lg img-mediana" alt="Imagen 2">
-        <p class="fw-semibold"><strong>Angela Romo</strong></p>
-        <p>Estudiante - Ingeniería de Sistemas</p>
+    <!-- MAPA -->
+    <div class="map-container" style="width: 100%; max-width: 900px; margin: auto; margin-top: 50px;">
+        <h3 style="text-align: center; color: #198754; margin-bottom: 15px;">Nuestra Ubicación</h3>
+
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7953.767153414796!2d-74.08295352229004!3d4.614847800000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f999ce316530f%3A0xb262e8596b0e1904!2sFundaci%C3%B3n%20Universitaria%20San%20Mateo%20%7C%20Educaci%C3%B3n%20Superior%20%7C%20Pregrados%20y%20Posgrados!5e0!3m2!1ses!2sco!4v1774462055857!5m2!1ses!2sco"
+            width="100%"
+            height="350"
+            style="border:0; border-radius:10px;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 
-    <!-- Segundo contenedor -->
-    <div class="team-member text-center">
-        <img src="{% static 'aut_app/images/slide1.jpg' %}" class="d-block w-100 rounded shadow-lg img-mediana" alt="Imagen 3">
-        <p class="fw-semibold"><strong>Juan Pérez</strong></p>
-        <p>Docente - Ingeniería de Sistemas</p>
-    </div>
 </div>
+
+
+<!-- ============================================================
+     SCRIPT DE ENVÍO A FRESHDESK
+=============================================================== -->
+<script>
+const FRESHDESK_API_KEY = "Xe6h1TBM3dM_MOicV34N";
+const FRESHDESK_DOMAIN = "soportevictimas";
+
+document.getElementById("formFreshdesk").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = {
+        name: document.getElementById("fd_nombre").value,
+        email: document.getElementById("fd_correo").value,
+        subject: document.getElementById("fd_asunto").value,
+        description: 
+            "Documento: " + document.getElementById("fd_documento").value + "\n\n" +
+            document.getElementById("fd_descripcion").value,
+        priority: Number(document.getElementById("fd_prioridad").value),
+        status: 2
+    };
+
+    const auth = btoa(FRESHDESK_API_KEY + ":X");
+
+    try {
+        const res = await fetch(`https://${FRESHDESK_DOMAIN}.freshdesk.com/api/v2/tickets`, {
+            method: "POST",
+            headers: {
+                "Authorization": "Basic " + auth,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+            document.getElementById("fd_mensaje").innerHTML =
+                "<span class='text-success'>✔ Ticket enviado a la mesa de ayuda.</span>";
+            document.getElementById("formFreshdesk").reset();
+        } else {
+            document.getElementById("fd_mensaje").innerHTML =
+                "<span class='text-danger'>❌ Error al enviar el ticket.</span>";
+        }
+    } catch {
+        document.getElementById("fd_mensaje").innerHTML =
+            "<span class='text-danger'>❌ Error de conexión.</span>";
+    }
+});
+</script>
+
 {% endblock %}

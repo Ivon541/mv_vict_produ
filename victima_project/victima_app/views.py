@@ -10,7 +10,10 @@ from .serializers import UsuarioSerializer, ContratosSerializer
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.db import connection #from .forms import BeneficiarioForm 
-#from .forms import BeneficiarioForm
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
 
 class ContratosViewSet(viewsets.ModelViewSet):
     """
@@ -626,3 +629,12 @@ def asignar_programa(request):
         'beneficiarios': beneficiarios  # Pasar los beneficiarios al contexto
     }
     return render(request, 'victima_app/asignar_programa.html', context)  # Renderizar la plantilla con el contexto
+
+@api_view(['GET'])
+def api_consultar_beneficios(request, documento):
+    try:
+        ciudadano = Beneficiarios.objects.get(documento_identidad=documento)
+        serializer = ConsultaCiudadanoSerializer(ciudadano)
+        return Response(serializer.data)
+    except Beneficiarios.DoesNotExist:
+        return Response({"error": "Ciudadano no encontrado"}, status=status.HTTP_404_NOT_FOUND)

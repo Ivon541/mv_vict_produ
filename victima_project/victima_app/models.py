@@ -86,9 +86,86 @@ class BeneficiarioProgramas(models.Model):
     class Meta:
         unique_together = ('id_beneficiario', 'id_programa')
 
+from .models import Beneficiarios, BeneficiarioProgramas, Programas
 
+def consultar_programa(request):
+    programas = None
+    ciudadano = None
+    documento_identidad = request.GET.get('documento_identidad', '').strip()
 
+    if documento_identidad:
+        try:
+            ciudadano = Beneficiarios.objects.get(documento_identidad=documento_identidad)
+            # Obtener los programas asociados al beneficiario
+            beneficiario_programas = BeneficiarioProgramas.objects.filter(
+                id_beneficiario=ciudadano
+            ).select_related('id_programa')
+            
+            programas = [bp.id_programa for bp in beneficiario_programas]
+            
+        except Beneficiarios.DoesNotExist:
+            programas = []  # Vacío pero no None → activa el mensaje "no encontrado"
 
+    return render(request, 'aut_app/home.html', {
+        'programas': programas,
+        'ciudadanos': ciudadano,
+        'documento_identidad': documento_identidad,
+    })
+
+def asignar_programa(request):
+    beneficiario = None
+    programas_asignados = []
+    ids_asignados = []
+    todos_los_programas = Programas.objects.all()
+    documento_identidad = ''
+    mensaje = ''
+
+    # GET → buscar beneficiario
+    if request.method == 'GET':
+        documento_identidad = request.GET.get('documento_identidad', '').strip()
+        if documento_identidad:
+            try:
+                beneficiario = Beneficiarios.objects.get(documento_identidad=documento_identidad)
+                relaciones = BeneficiarioProgramas.objects.filter(
+                    id_beneficiario=beneficiario
+                ).select_related('id_programa')
+                programas_asignados = [r.id_programa for r in relaciones]
+                ids_asignados = [p.id_programa for p in programas_asignados]
+            except Beneficiarios.DoesNotExist:
+                beneficiario = None
+
+    # POST → asignar programa
+    elif request.method == 'POST':
+        id_beneficiario = request.POST.get('id_beneficiario')
+        id_programa = request.POST.get('id_programa')
+        documento_identidad = request.POST.get('documento_identidad', '')
+
+        beneficiario = get_object_or_404(Beneficiarios, id_beneficiario=id_beneficiario)
+        programa = get_object_or_404(Programas, id_programa=id_programa)
+
+        _, creado = BeneficiarioProgramas.objects.get_or_create(
+            id_beneficiario=beneficiario,
+            id_programa=programa
+        )
+
+        mensaje = f"✅ Programa '{programa.nombre}' asignado correctamente." if creado else "⚠️ Este programa ya estaba asignado."
+
+        # Recargar programas asignados
+        relaciones = BeneficiarioProgramas.objects.filter(
+            id_beneficiario=beneficiario
+        ).select_related('id_programa')
+        programas_asignados = [r.id_programa for r in relaciones]
+        ids_asignados = [p.id_programa for p in programas_asignados]
+        todos_los_programas = Programas.objects.all()
+
+    return render(request, 'aut_app/asignar_programa.html', {
+        'beneficiario': beneficiario,
+        'programas_asignados': programas_asignados,
+        'ids_asignados': ids_asignados,
+        'todos_los_programas': todos_los_programas,
+        'documento_identidad': documento_identidad,
+        'mensaje': mensaje,
+    })
 
 
 

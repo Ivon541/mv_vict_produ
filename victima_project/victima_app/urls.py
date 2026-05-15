@@ -26,9 +26,12 @@ urlpatterns = [
     path('eliminar-entrega/<int:id_entrega>/', views.eliminar_entrega, name='eliminar_entrega'),
     path('editar-entrega/<int:id_entrega>/', views.editar_entrega, name='editar_entrega'),  # Editar entrega
     path('consultar-programa/', views.consultar_programa, name='consultar_programas'),  # Consultar programa
+    path('asignar-programa/', views.asignar_programa, name='asignar_programa'),
+    path('api/consulta/<str:documento>/', views.api_consultar_beneficios, name='api_consulta'),
     #path('', views.home, name='home'),
     #path('detalle/<int:id>/', views.detalle, name='detalle'),
     #path('crear/', views.crear, name='crear'),
     #path('editar/<int:id>/', views.editar, name='editar'),
-    #path('eliminar/<int:id>/', views.eliminar, name='eliminar'),
+    #path('eliminar/<int:id>/', views.eliminar, name='eliminar'),   
+    
 ] 

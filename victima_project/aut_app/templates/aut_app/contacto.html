@@ -1,51 +1,101 @@
 {% extends "aut_app/base_generica.html" %}
 
 {% block title %}Inicio{% endblock %}
-    
+
 {% load static %}
 
 {% block content %}
-<section class="contacto py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center fw-bold text-primary mb-4">Contáctanos</h2>
-        
-        <div class="row">
-            <div class="col-md-6">
-                <div class="p-4 shadow-lg border rounded bg-white">
-                    <h4 class="fw-bold">Información de Contacto</h4>
-                    <p><strong>Correo:</strong> contacto@ejemplo.com</p>
-                    <p><strong>Teléfono:</strong> +57 123 456 7890</p>
-                    <p><strong>Dirección:</strong> Calle 123, Bogotá, Colombia</p>
-                    <p><strong>Horario de Atención:</strong> Lunes a Viernes, 9:00 AM - 5:00 PM</p>
-                    
-                    <h4 class="fw-bold mt-3">Redes Sociales</h4>
-                    <a href="#" class="btn btn-outline-primary me-2">Facebook</a>
-                    <a href="#" class="btn btn-outline-primary me-2">Twitter</a>
-                    <a href="#" class="btn btn-outline-primary">Instagram</a>
-                </div>
-            </div>
-            
-            <div class="col-md-6">
-                <div class="p-4 shadow-lg border rounded bg-white">
-                    <h4 class="fw-bold">Formulario de Contacto</h4>
-                    <form>
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="email" placeholder="Tu correo electrónico">
-                        </div>
-                        <div class="mb-3">
-                            <label for="mensaje" class="form-label">Mensaje</label>
-                            <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Enviar Mensaje</button>
-                    </form>
-                </div>
-            </div>
+
+<!-- Sección: Indicadores de Impacto -->
+<section class="impacto py-5" style="background-color: #eef3f7;">
+  <div class="container text-center">
+    <h2 class="fw-bold" style="color:#28a745;" class="mb-4">Impacto de los Programas</h2>
+    <p class="text-muted mb-5">Conoce cómo los programas del Estado han beneficiado a víctimas del conflicto armado en Colombia.</p>
+
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-3 col-sm-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100 d-flex flex-column align-items-center">
+          <img src="https://images.unsplash.com/photo-1756541790216-2b23c9113e43?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               alt="Vivienda" class="mb-3 rounded img-fluid" style="height:120px; object-fit:cover; width:100%;">
+          <h3 class="fw-bold" style="color:#28a745;">1,200</h3>
+          <p>Familias beneficiadas con subsidios de vivienda</p>
         </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100 d-flex flex-column align-items-center">
+          <img src="https://images.unsplash.com/photo-1676286853148-ec365527c872?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               alt="Alimentación" class="mb-3 rounded img-fluid" style="height:120px; object-fit:cover; width:100%;">
+          <h3 class="fw-bold" style="color:#28a745;">5,000</h3>
+          <p>Personas atendidas con apoyo alimentario</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100 d-flex flex-column align-items-center">
+          <img src="https://plus.unsplash.com/premium_photo-1682284079664-c90a1603733b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               alt="Educación" class="mb-3 rounded img-fluid" style="height:120px; object-fit:cover; width:100%;">
+          <h3 class="fw-bold" style="color:#28a745;">800</h3>
+          <p>Víctimas capacitadas en programas educativos y laborales</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100 d-flex flex-column align-items-center">
+          <img src="https://media.istockphoto.com/id/1439806851/photo/hands-holding-smile-face-in-brain-paper-cut-happy-smiley-emotion-and-relax-mood-hormones-full.jpg?s=1024x1024&w=is&k=20&c=iJT85BSSAJ8grevUYMmTOd4tzY7ANDgRN-CM4rbvtHA=" 
+               alt="Apoyo Psicosocial" class="mb-3 rounded img-fluid" style="height:120px; object-fit:cover; width:100%;">
+          <h3 class="fw-bold" style="color:#28a745;">1,500</h3>
+          <p>Atenciones de apoyo psicosocial brindadas</p>
+        </div>
+      </div>
+
     </div>
+  </div>
 </section>
+
+<!-- Sección: Historias de Apoyo -->
+<section class="historias py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-5" style="color:#28a745;">Historias de Apoyo</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img src="https://images.unsplash.com/photo-1756541790216-2b23c9113e43?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               class="card-img-top" alt="Historia 1" style="height:200px; object-fit:cover;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold" style="color:#28a745;">Ana, beneficiaria de vivienda</h5>
+            <p class="card-text text-muted">Gracias al programa, Ana y su familia ahora tienen un hogar seguro.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img src="https://images.unsplash.com/photo-1676286853148-ec365527c872?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               class="card-img-top" alt="Historia 2" style="height:200px; object-fit:cover;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold" style="color:#28a745;">Jorge, capacitación laboral</h5>
+            <p class="card-text text-muted">Jorge recibió formación profesional y hoy trabaja en un empleo estable.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img src="https://media.istockphoto.com/id/1439806851/photo/hands-holding-smile-face-in-brain-paper-cut-happy-smiley-emotion-and-relax-mood-hormones-full.jpg?s=1024x1024&w=is&k=20&c=iJT85BSSAJ8grevUYMmTOd4tzY7ANDgRN-CM4rbvtHA=" 
+               class="card-img-top" alt="Historia 3" style="height:200px; object-fit:cover;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold" style="color:#28a745;">Lucía, apoyo psicosocial</h5>
+            <p class="card-text text-muted">Lucía superó traumas del conflicto gracias a la atención psicosocial del programa.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 {% endblock %}

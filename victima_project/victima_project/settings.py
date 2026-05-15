@@ -10,11 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# cargar .env
+load_dotenv(
+    os.path.join(
+        BASE_DIR,
+        ".env"
+    )
+)
+
+# API KEY GEMINI
+GOOGLE_API_KEY = os.getenv(
+    "GOOGLE_API_KEY"
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -80,10 +93,10 @@ WSGI_APPLICATION = 'victima_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'victima_dev',
-        'USER': 'sa',
-        'PASSWORD': 'Soporte1*',
-        'HOST': 'DESKTOP-UP3AEA7\\GSI',
+        'NAME': 'vict_prod',
+        'USER': 'ivonne_1',
+        'PASSWORD': '5410',
+        'HOST': 'AICRIOLLOR\\SQLEXPRESS',
         'PORT': '',
         'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',
